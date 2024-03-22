@@ -27,6 +27,29 @@ async function main() {
                     return res.send("Hello World");
                 });
 
+                // UTILISATEURS
+
+                app.get("/utilisateurs", async (req, res) => {
+                   try {
+                       let document = await db.collection("utilisateurs").find().toArray();
+                       res.json(document);
+                   } catch (error) {
+                       console.log("Erreur lors de la récupérations des utilisateurs:", error);
+                       res.status(500).json({error: "Une erreur est survenue"});
+                   }
+
+                });
+
+                //TODO Continuer les liens pour utilisateur
+
+                // BIENS
+
+                //TODO Faire les lien pour les "Biens"
+
+                // LOCATIONS
+
+                //TODO Faire les lien pour les "Locations"
+
 
                 // OLD DATABASE
 
