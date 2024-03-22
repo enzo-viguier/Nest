@@ -1,0 +1,51 @@
+[
+  {
+    "mail":"peter.parker@gmail.com",
+    "prénom": "Peter",
+    "nom": "Parker",
+    "téléphone": "03 37 00 74 04"
+  },
+  {
+    "mail":"steve.rogers@gmail.com",
+    "prénom": "Steve",
+    "nom": "Rogers",
+    "téléphone": "06 35 40 56 63"
+  },
+  {
+    "mail":"tony.stark@gmail.com",
+    "prénom": "Tony",
+    "nom": "Stark",
+    "téléphone": "07 19 58 80 64"
+  },
+  {
+    "mail":"matt.murdock@gmail.com",
+    "prénom": "Matt",
+    "nom": "Murdock",
+    "téléphone": "05 03 87 85 41"
+  },
+  {
+    "mail":"stephen.strange@gmail.com",
+    "prénom": "Stephen",
+    "nom": "Strange",
+    "téléphone": "04 18 93 88 11"
+  },
+  {
+    "mail":"enzo.viguier@etu.umontpellier",
+    "prénom": "Enzo",
+    "nom": "Viguier",
+    "téléphone": "07 82 82 82 82"
+  },
+  {
+    "mail":"aurelien.milla@etu.umontpellier",
+    "prénom": "Aurélien",
+    "nom": "Milla",
+    "téléphone": "07 83 83 83 83"
+  },
+  {
+    "mail":"tristan.gaido@etu.umontpellier",
+    "prénom": "Tristan",
+    "nom": "Gaido",
+    "téléphone": "07 84 84 84 84"
+  }
+
+]
