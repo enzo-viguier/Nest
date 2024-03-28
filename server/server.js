@@ -173,6 +173,9 @@ async function main() {
                     }
                 });
 
+                // ### LOCATIONS ###
+
+                // Récupérer toutes les biens
                 app.get("/biens", async (req, res) => {
 
                         try {
@@ -183,6 +186,7 @@ async function main() {
                         }
                 });
 
+                // Récupérer un bien par son id
                 app.get("/biens/:idBien", async (req, res) => {
                     const idBien = req.params.idBien;
                     try {
@@ -194,6 +198,91 @@ async function main() {
                         }
                     } catch (err) {
                         res.status(500).send(err);
+                    }
+                });
+
+                // Ajouter un bien
+                app.post("/biens/ajouter", async (req, res) => {
+                    // Extraction des données du corps de la requête
+                    const { idBien, mailProprio, commune, rue, cp, nbCouchages, nbChambres, distance, prix } = req.body;
+
+                    try {
+                        // Vérification de l'existence du propriétaire
+                        const proprietaireExiste = await Utilisateur.findOne({ mail: mailProprio });
+
+                        // Si le propriétaire n'existe pas, renvoyez une erreur
+                        if (!proprietaireExiste) {
+                            return res.status(400).json({ message: "Le mail du propriétaire n'existe pas dans la collection des utilisateurs." });
+                        }
+
+                        // Si le propriétaire existe, créez le bien
+                        const nouveauBien = new Bien({
+                            idBien,
+                            mailProprio,
+                            commune,
+                            rue,
+                            cp,
+                            nbCouchages,
+                            nbChambres,
+                            distance,
+                            prix
+                        });
+
+                        // Sauvegarde du bien dans la base de données
+                        const bienEnregistre = await nouveauBien.save();
+                        res.status(201).json(bienEnregistre);
+                    } catch (err) {
+                        console.error("Erreur lors de l'ajout du bien: ", err);
+                        res.status(500).send(err);
+                    }
+                });
+
+                // Modifier un bien
+                app.put("/biens/modifier/:idBien", async (req, res) => {
+                    const { commune, rue, cp, nbCouchages, nbChambres, distance, prix } = req.body;
+                    const idBien = req.params.idBien;
+
+                    try {
+                        const updatedData = {
+                            ...(commune && {commune}),
+                            ...(rue && {rue}),
+                            ...(cp && {cp}),
+                            ...(nbCouchages && {nbCouchages}),
+                            ...(nbChambres && {nbChambres}),
+                            ...(distance && {distance}),
+                            ...(prix && {prix})
+                        };
+
+                        const result = await db.collection("biens").updateOne({ idBien }, { $set: updatedData });
+
+                        if (result.matchedCount === 0) {
+                            res.status(404).json({ message: "Bien non trouvé" });
+                        } else {
+                            res.status(200).json({ message: "Bien mis à jour avec succès", result: result });
+                        }
+                    } catch (error) {
+                        console.error("Erreur lors de la mise à jour du bien:", error);
+                        res.status(500).json({ error: "Une erreur est survenue lors de la mise à jour du bien" });
+                    }
+
+                });
+
+                // Supprimer un bien
+                app.delete("/biens/supprimer/:idBien", async (req, res) => {
+
+                    const idBien = Number(req.params.idBien);
+
+                    try {
+                        const result = await db.collection("biens").deleteOne({ idBien });
+
+                        if (result.deletedCount === 0) {
+                            res.status(404).json({ message: "Bien non trouvé" });
+                        } else {
+                            res.status(200).json({ message: "Bien supprimé avec succès", result: result });
+                        }
+                    } catch (error) {
+                        console.error("Erreur lors de la suppression du bien:", error);
+                        res.status(500).json({ error: "Une erreur est survenue lors de la suppression du bien" });
                     }
                 });
 
