@@ -43,9 +43,9 @@ const bienSchema = new Schema({
 const locationSchema = new Schema({
     idLocation: { type: Number, required: true, unique: true },
     idBien: { type: Number, required: true, ref: 'Bien' },
-    mailLocateur: { type: String, required: true, ref: 'utilisateurs' },
-    dateDebut: { type: Date, required: true },
-    dateFin: { type: Date, required: true },
+    mailLoueur: { type: String, required: true, ref: 'utilisateurs' },
+    dateDébut: { type: String, required: true },
+    dateFin: { type: String, required: true },
     avis: String
 });
 
@@ -283,6 +283,119 @@ async function main() {
                     } catch (error) {
                         console.error("Erreur lors de la suppression du bien:", error);
                         res.status(500).json({ error: "Une erreur est survenue lors de la suppression du bien" });
+                    }
+                });
+
+                // ### LOCATIONS ###
+
+                // Récupérer toutes les locations
+                app.get("/locations", async (req, res) => {
+                    try {
+                        const locations = await Location.find({});
+                        res.json(locations);
+                    } catch (error) {
+                        res.status(500).send(error);
+                    }
+                });
+
+                // Récupérer une location par son id
+                app.get("/locations/:idLocation", async (req, res) => {
+                    const idLocation = req.params.idLocation;
+                    try {
+                        const location = await Location.findOne({ idLocation: idLocation });
+                        if (!location) {
+                            res.status(404).send('Location non trouvée');
+                        } else {
+                            res.json(location);
+                        }
+                    } catch (err) {
+                        res.status(500).send(err);
+                    }
+                });
+
+                // Ajouter une location
+                app.post("/locations/ajouter", async (req, res) => {
+                    // Extraction des données du corps de la requête
+                    const { idLocation, idBien, mailLoueur, dateDébut, dateFin, avis } = req.body;
+
+                    try {
+                        // Vérification de l'existence du locateur
+                        const locateurExiste = await Utilisateur.findOne({ mail: mailLoueur });
+
+                        // Vérification de l'existence du bien
+                        const bienExiste = await Bien.findOne({ idBien: idBien });
+
+                        // Si le locateur ou le bien n'existe pas, renvoyez une erreur
+                        if (!locateurExiste) {
+                            return res.status(400).json({ message: "Le mail du locateur n'existe pas dans la collection des utilisateurs." });
+                        }
+
+                        if (!bienExiste) {
+                            return res.status(400).json({ message: "L'id du bien n'existe pas dans la collection des biens." });
+                        }
+
+                        // Si le locateur et le bien existent, créez la location
+                        const nouvelleLocation = new Location({
+                            idLocation,
+                            idBien,
+                            mailLoueur,
+                            dateDébut,
+                            dateFin,
+                            avis
+                        });
+
+                        // Sauvegarde de la location dans la base de données
+                        const locationEnregistree = await nouvelleLocation.save();
+                        res.status(201).json(locationEnregistree);
+                    } catch (err) {
+                        console.error("Erreur lors de l'ajout de la location: ", err);
+                        res.status(500).send(err);
+                    }
+                });
+
+                // Modifier une location
+                app.put("/locations/modifier/:idLocation", async (req, res) => {
+
+                    const { dateDébut, dateFin, avis } = req.body;
+                    const idLocation = req.params.idLocation;
+
+                    try {
+                        const updatedData = {
+                            ...(dateDébut && {dateDébut}),
+                            ...(dateFin && {dateFin}),
+                            ...(avis && {avis})
+                        };
+
+                        const result = await db.collection("locations").updateOne({ idLocation }, { $set: updatedData });
+
+                        if (result.matchedCount === 0) {
+                            res.status(404).json({ message: "Location non trouvée" });
+                        } else {
+                            res.status(200).json({ message: "Location mise à jour avec succès", result: result });
+                        }
+
+                    } catch (error) {
+                        console.error("Erreur lors de la mise à jour de la location:", error);
+                        res.status(500).json({ error: "Une erreur est survenue lors de la mise à jour de la location" });
+                    }
+
+                });
+
+                // Supprimer une location
+                app.delete("/locations/supprimer/:idLocation", async (req, res) => {
+                    const idLocation = Number(req.params.idLocation);
+
+                    try {
+                        const result = await db.collection("locations").deleteOne({ idLocation });
+
+                        if (result.deletedCount === 0) {
+                            res.status(404).json({ message: "Location non trouvée" });
+                        } else {
+                            res.status(200).json({ message: "Location supprimée avec succès", result: result });
+                        }
+                    } catch (error) {
+                        console.error("Erreur lors de la suppression de la location:", error);
+                        res.status(500).json({ error: "Une erreur est survenue lors de la suppression de la location" });
                     }
                 });
 
