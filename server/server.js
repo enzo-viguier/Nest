@@ -97,6 +97,7 @@ async function main() {
                         const utilisateur = await Utilisateur.findOne({ mail: email });
                         if (!utilisateur) {
                             res.status(404).send('Utilisateur non trouvé');
+                            console.log(res)
                         } else {
                             res.json(utilisateur);
                         }
