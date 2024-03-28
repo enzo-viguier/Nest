@@ -1,79 +1,79 @@
 [
   {
-    "idLocation": "1",
-    "idBien": "1",
+    "idLocation": 1,
+    "idBien": 1,
     "mailLoueur": "steve.rogers@gmail.com",
     "dateDébut": "20240615",
     "dateFin": "20240620",
     "avis": 4.5
   },
   {
-    "idLocation": "2",
-    "idBien": "2",
+    "idLocation": 2,
+    "idBien": 2,
     "mailLoueur": "enzo.viguier@etu.umontpellier",
     "dateDébut": "20240701",
     "dateFin": "20240712",
     "avis": 4.2
   },
   {
-    "idLocation": "3",
-    "idBien": "3",
+    "idLocation": 3,
+    "idBien": 3,
     "mailLoueur": "aurelien.milla@etu.umontpellier",
     "dateDébut": "20240820",
     "dateFin": "20240830",
     "avis": 4.7
   },
   {
-    "idLocation": "4",
-    "idBien": "4",
+    "idLocation": 4,
+    "idBien": 4,
     "mailLoueur": "tristan.gaido@etu.umontpellier",
     "dateDébut": "20240910",
     "dateFin": "20240915",
     "avis": 3.8
   },
   {
-    "idLocation": "5",
-    "idBien": "5",
+    "idLocation": 5,
+    "idBien": 5,
     "mailLoueur": "steve.rogers@gmail.com",
     "dateDébut": "20241005",
     "dateFin": "20241010",
     "avis": 4.9
   },
   {
-    "idLocation": "6",
-    "idBien": "6",
+    "idLocation": 6,
+    "idBien": 6,
     "mailLoueur": "enzo.viguier@etu.umontpellier",
     "dateDébut": "20241115",
     "dateFin": "20241125",
     "avis": 4.0
   },
   {
-    "idLocation": "7",
-    "idBien": "7",
+    "idLocation": 7,
+    "idBien": 7,
     "mailLoueur": "aurelien.milla@etu.umontpellier",
     "dateDébut": "20241201",
     "dateFin": "20241210",
     "avis": 4.3
   },
   {
-    "idLocation": "8",
-    "idBien": "8",
+    "idLocation": 8,
+    "idBien": 8,
     "mailLoueur": "tristan.gaido@etu.umontpellier",
     "dateDébut": "20250105",
     "dateFin": "20250114",
     "avis": 4.6
   },
   {
-    "idLocation": "9",
-    "idBien": "9",
+    "idLocation": 9,
+    "idBien": 9,
     "mailLoueur": "steve.rogers@gmail.com",
     "dateDébut": "20250220",
     "dateFin": "20250228",
     "avis": 4.1
   },
   {
-    "idLocation": "10",
-    "idBien": "10",
+    "idLocation": 10,
+    "idBien": 10,
     "mailLoueur": "enzo.viguier@etu.umontpellier",
     "dateDébut": "20250310",
     "dateFin": "20250320",

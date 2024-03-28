@@ -1,7 +1,7 @@
 [
 
   {
-    "idBien": "1",
+    "idBien": 1,
     "mailProprio": "tony.stark@gmail.com",
     "commune": "Lyon",
     "rue": "10 Rue de la République",
@@ -12,7 +12,7 @@
     "prix": 75
   },
   {
-    "idBien": "2",
+    "idBien": 2,
     "mailProprio": "tony.stark@gmail.com",
     "commune": "Bordeaux",
     "rue": "47 Rue du Palais Gallien",
@@ -23,7 +23,7 @@
     "prix": 90
   },
   {
-    "idBien": "3",
+    "idBien": 3,
     "mailProprio": "tony.stark@gmail.com",
     "commune": "Lille",
     "rue": "15 Rue de Béthune",
@@ -34,7 +34,7 @@
     "prix": 110
   },
   {
-    "idBien": "4",
+    "idBien": 4,
     "mailProprio": "peter.parker@gmail.com",
     "commune": "Nice",
     "rue": "22 Avenue Jean Médecin",
@@ -45,7 +45,7 @@
     "prix": 70
   },
   {
-    "idBien": "5",
+    "idBien": 5,
     "mailProprio": "matt.murdock@gmail.com",
     "commune": "Strasbourg",
     "rue": "4 Rue des Francs Bourgeois",
@@ -56,7 +56,7 @@
     "prix": 95
   },
   {
-    "idBien": "6",
+    "idBien": 6,
     "mailProprio": "stephen.strange@gmail.com",
     "commune": "Nantes",
     "rue": "39 Rue de la Fosse",
@@ -67,7 +67,7 @@
     "prix": 80
   },
   {
-    "idBien": "7",
+    "idBien": 7,
     "mailProprio": "stephen.strange@gmail.com",
     "commune": "Montpellier",
     "rue": "58 Place de la Comédie",
@@ -78,7 +78,7 @@
     "prix": 100
   },
   {
-    "idBien": "8",
+    "idBien": 8,
     "mailProprio": "stephen.strange@gmail.com",
     "commune": "Toulouse",
     "rue": "77 Allée Jean Jaurès",
@@ -89,7 +89,7 @@
     "prix": 60
   },
   {
-    "idBien": "9",
+    "idBien": 9,
     "mailProprio": "tony.stark@gmail.com",
     "commune": "Rennes",
     "rue": "88 Rue de la Chalotais",
@@ -100,7 +100,7 @@
     "prix": 105
   },
   {
-    "idBien": "10",
+    "idBien": 10,
     "mailProprio": "tony.stark@gmail.com",
     "commune": "Grenoble",
     "rue": "9 Rue Lazare Carnot",
