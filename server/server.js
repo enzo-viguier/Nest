@@ -1,9 +1,12 @@
 const express = require("express");
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 const app = express();
+
+const saltRounds = 10;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -25,7 +28,8 @@ const utilisateurSchema = new Schema({
     mail: { type: String, required: true, unique: true },
     prénom: { type: String, required: true },
     nom: { type: String, required: true },
-    téléphone: { type: String, required: true }
+    téléphone: { type: String, required: true },
+    motDePasse: { type: String, required: true }
 })
 
 const bienSchema = new Schema({
@@ -111,11 +115,15 @@ async function main() {
 
                 app.post('/utilisateurs/ajouter', async (req, res) => {
                     // Création d'une nouvelle instance de l'utilisateur avec les données reçues (ex. via le corps de la requête)
+
+                    const hashedPassword = await bcrypt.hash(req.body.motDePasse, saltRounds);
+
                     const nouvelUtilisateur = new Utilisateur({
                         mail: req.body.mail,
                         prénom: req.body.prénom,
                         nom: req.body.nom,
-                        téléphone: req.body.téléphone
+                        téléphone: req.body.téléphone,
+                        motDePasse: hashedPassword
                     });
 
                     try {
@@ -400,15 +408,37 @@ async function main() {
                     }
                 });
 
+                app.post("/utilisateur/connexion", async (req, res) => {
+                    try {
+                        const utilisateur = await Utilisateur.findOne({ mail: req.body.mail });
+                        if (utilisateur) {
+                            // Comparez le mot de passe fourni avec le haché stocké
+                            const match = await bcrypt.compare(req.body.motDePasse, utilisateur.motDePasse);
+                            if (match) {
+                                // Authentification réussie
+                                res.json({ "resultat": 1, "message": "Authentification réussie" });
+                            } else {
+                                // Échec de l'authentification
+                                res.json({ "resultat": 0, "message": "Mot de passe incorrect" });
+                            }
+                        } else {
+                            res.status(404).json({ message: "Utilisateur non trouvé" });
+                        }
+                    } catch (err) {
+                        // Gestion des erreurs
+                    }
+                });
+
+
                 // OLD DATABASE
 
-                app.post("/user/connexion", async (req,res) => {
-                    console.log("/user/connexion avec ", req.body);
-                    let document = await db.collection("users").find(req.body).toArray();
-                    if (document.length === 1)
-                        res.json({"resultat": 1, "message": "Authentification réussie"});
-                    else res.json({"resultat": 0, "message": "Email et/ou mot de passe incorrect"});
-                });
+                // app.post("/user/connexion", async (req,res) => {
+                //     console.log("/user/connexion avec ", req.body);
+                //     let document = await db.collection("users").find(req.body).toArray();
+                //     if (document.length === 1)
+                //         res.json({"resultat": 1, "message": "Authentification réussie"});
+                //     else res.json({"resultat": 0, "message": "Email et/ou mot de passe incorrect"});
+                // });
 
                 // FIN OLD DATABASE
 
