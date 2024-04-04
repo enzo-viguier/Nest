@@ -357,7 +357,7 @@ async function main() {
                 app.put("/locations/modifier/:idLocation", async (req, res) => {
 
                     const { dateDébut, dateFin, avis } = req.body;
-                    const idLocation = req.params.idLocation;
+                    const idLocation = Number(req.params.idLocation);
 
                     try {
                         const updatedData = {
@@ -383,6 +383,7 @@ async function main() {
 
                 // Supprimer une location
                 app.delete("/locations/supprimer/:idLocation", async (req, res) => {
+
                     const idLocation = Number(req.params.idLocation);
 
                     try {
