@@ -8,6 +8,7 @@ import {FooterComponent} from "../footer/footer.component";
   imports: [NavComponent, FooterComponent],
   templateUrl: './connexion.component.html',
   styleUrl: './connexion.component.css'
+
 })
 export class ConnexionComponent {
 
