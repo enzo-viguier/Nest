@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NavComponent} from "../nav/nav.component";
 import {FooterComponent} from "../footer/footer.component";
 import {ListeAnnonceComponent} from "../liste-annonce/liste-annonce.component";
+import {SearchBarComponent} from "../search-bar/search-bar.component";
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,8 @@ import {ListeAnnonceComponent} from "../liste-annonce/liste-annonce.component";
   imports: [
     NavComponent,
     FooterComponent,
-    ListeAnnonceComponent
+    ListeAnnonceComponent,
+    SearchBarComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
