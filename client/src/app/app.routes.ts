@@ -12,11 +12,6 @@ export const routes: Routes = [
     title: 'NEST - Accueil'
   },
   {
-    path: '**',
-    component: NotfoundComponent,
-    title: 'NEST - Page non trouvée'
-  },
-  {
     path: 'connexion',
     component: ConnexionComponent,
     title: 'NEST - Connexion'
@@ -25,6 +20,11 @@ export const routes: Routes = [
     path: 'inscription',
     component: InscriptionComponent,
     title: 'NEST - Inscription'
-  }
+  },
+  {
+    path: '**',
+    component: NotfoundComponent,
+    title: 'NEST - Page non trouvée'
+  },
 
 ];
