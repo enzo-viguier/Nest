@@ -21,6 +21,7 @@ export const routes: Routes = [
     component: InscriptionComponent,
     title: 'NEST - Inscription'
   },
+  //Page NotFound -> A mettre en dernier !
   {
     path: '**',
     component: NotfoundComponent,
