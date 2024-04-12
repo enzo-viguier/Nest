@@ -1,0 +1,319 @@
+### Bien de l'utilisateur 1 (Alice Dumont)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 1,
+  "mailProprio": "alice.dumont@example.com",
+  "commune": "Paris",
+  "rue": "5 Rue de l'Échiquier",
+  "cp": "75010",
+  "nbCouchages": 2,
+  "nbChambres": 1,
+  "distance": 1500,
+  "prix": 75
+}
+
+### Bien de l'utilisateur 1 (Alice Dumont) - second bien
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 2,
+  "mailProprio": "alice.dumont@example.com",
+  "commune": "Paris",
+  "rue": "30 Rue de Paradis",
+  "cp": "75010",
+  "nbCouchages": 4,
+  "nbChambres": 2,
+  "distance": 1700,
+  "prix": 95
+}
+
+### Bien de l'utilisateur 2 (Bob Martin)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 3,
+  "mailProprio": "bob.martin@example.com",
+  "commune": "Lyon",
+  "rue": "20 Rue Victor Hugo",
+  "cp": "69002",
+  "nbCouchages": 3,
+  "nbChambres": 2,
+  "distance": 1000,
+  "prix": 85
+}
+
+### Bien de l'utilisateur 3 (Caroline Dupont)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 4,
+  "mailProprio": "caroline.dupont@example.com",
+  "commune": "Marseille",
+  "rue": "55 Rue Paradis",
+  "cp": "13006",
+  "nbCouchages": 5,
+  "nbChambres": 3,
+  "distance": 800,
+  "prix": 100
+}
+
+### Bien de l'utilisateur 4 (David Bernard)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 5,
+  "mailProprio": "david.bernard@example.com",
+  "commune": "Toulouse",
+  "rue": "12 Rue des Filatiers",
+  "cp": "31000",
+  "nbCouchages": 3,
+  "nbChambres": 2,
+  "distance": 1200,
+  "prix": 90
+}
+
+### Bien de l'utilisateur 4 (David Bernard) - second bien
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 6,
+  "mailProprio": "david.bernard@example.com",
+  "commune": "Toulouse",
+  "rue": "78 Allée Jean Jaurès",
+  "cp": "31000",
+  "nbCouchages": 2,
+  "nbChambres": 1,
+  "distance": 1400,
+  "prix": 65
+}
+
+### Bien de l'utilisateur 5 (Élise Moreau)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 7,
+  "mailProprio": "elise.moreau@example.com",
+  "commune": "Nice",
+  "rue": "10 Boulevard Victor Hugo",
+  "cp": "06000",
+  "nbCouchages": 4,
+  "nbChambres": 3,
+  "distance": 900,
+  "prix": 120
+}
+
+### Bien de l'utilisateur 6 (François Petit)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 8,
+  "mailProprio": "francois.petit@example.com",
+  "commune": "Strasbourg",
+  "rue": "25 Avenue des Vosges",
+  "cp": "67000",
+  "nbCouchages": 3,
+  "nbChambres": 2,
+  "distance": 1100,
+  "prix": 75
+}
+
+### Bien de l'utilisateur 7 (Gaëlle Roux)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 9,
+  "mailProprio": "gaelle.roux@example.com",
+  "commune": "Bordeaux",
+  "rue": "33 Cours de l'Intendance",
+  "cp": "33000",
+  "nbCouchages": 2,
+  "nbChambres": 1,
+  "distance": 700,
+  "prix": 85
+}
+
+### Bien de l'utilisateur 8 (Henri Lemoine)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 10,
+  "mailProprio": "henri.lemoine@example.com",
+  "commune": "Lille",
+  "rue": "48 Rue de la Clef",
+  "cp": "59000",
+  "nbCouchages": 4,
+  "nbChambres": 2,
+  "distance": 500,
+  "prix": 95
+}
+
+### Bien de l'utilisateur 9 (Isabelle Girard)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 11,
+  "mailProprio": "isabelle.girard@example.com",
+  "commune": "Nantes",
+  "rue": "15 Rue de la Fosse",
+  "cp": "44000",
+  "nbCouchages": 3,
+  "nbChambres": 2,
+  "distance": 1300,
+  "prix": 80
+}
+
+### Bien de l'utilisateur 10 (Julien Fournier)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 12,
+  "mailProprio": "julien.fournier@example.com",
+  "commune": "Montpellier",
+  "rue": "9 Rue de l'Aiguillerie",
+  "cp": "34000",
+  "nbCouchages": 2,
+  "nbChambres": 1,
+  "distance": 1000,
+  "prix": 70
+}
+
+### Bien de l'utilisateur 10 (Julien Fournier) - second bien
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 13,
+  "mailProprio": "julien.fournier@example.com",
+  "commune": "Montpellier",
+  "rue": "18 Place de la Comédie",
+  "cp": "34000",
+  "nbCouchages": 3,
+  "nbChambres": 2,
+  "distance": 500,
+  "prix": 95
+}
+
+### Bien de l'utilisateur 11 (Karine Mercier)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 14,
+  "mailProprio": "karine.mercier@example.com",
+  "commune": "Reims",
+  "rue": "12 Rue de Mars",
+  "cp": "51100",
+  "nbCouchages": 2,
+  "nbChambres": 1,
+  "distance": 800,
+  "prix": 75
+}
+
+### Bien de l'utilisateur 11 (Karine Mercier) - second bien
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 15,
+  "mailProprio": "karine.mercier@example.com",
+  "commune": "Reims",
+  "rue": "7 Place Royale",
+  "cp": "51100",
+  "nbCouchages": 4,
+  "nbChambres": 3,
+  "distance": 300,
+  "prix": 120
+}
+
+### Bien de l'utilisateur 12 (Louis Dupuis)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 16,
+  "mailProprio": "louis.dupuis@example.com",
+  "commune": "Clermont-Ferrand",
+  "rue": "22 Boulevard Desaix",
+  "cp": "63000",
+  "nbCouchages": 3,
+  "nbChambres": 2,
+  "distance": 1100,
+  "prix": 80
+}
+
+### Bien de l'utilisateur 13 (Marie Fontaine)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 17,
+  "mailProprio": "marie.fontaine@example.com",
+  "commune": "Dijon",
+  "rue": "15 Rue de la Liberté",
+  "cp": "21000",
+  "nbCouchages": 2,
+  "nbChambres": 1,
+  "distance": 950,
+  "prix": 70
+}
+
+### Bien de l'utilisateur 14 (Nicolas Lefèvre)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 18,
+  "mailProprio": "nicolas.lefevre@example.com",
+  "commune": "Rennes",
+  "rue": "40 Rue de la Monnaie",
+  "cp": "35000",
+  "nbCouchages": 4,
+  "nbChambres": 2,
+  "distance": 1200,
+  "prix": 90
+}
+
+### Bien de l'utilisateur 15 (Olivia Blanc)
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 19,
+  "mailProprio": "olivia.blanc@example.com",
+  "commune": "Grenoble",
+  "rue": "6 Rue de Bonne",
+  "cp": "38000",
+  "nbCouchages": 3,
+  "nbChambres": 2,
+  "distance": 1000,
+  "prix": 85
+}
+
+### Bien de l'utilisateur 15 (Olivia Blanc) - second bien
+POST http://localhost:8888/biens/ajouter
+Content-Type: application/json
+
+{
+  "idBien": 20,
+  "mailProprio": "olivia.blanc@example.com",
+  "commune": "Grenoble",
+  "rue": "1 Place Victor Hugo",
+  "cp": "38000",
+  "nbCouchages": 5,
+  "nbChambres": 3,
+  "distance": 600,
+  "prix": 115
+}

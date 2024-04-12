@@ -1,0 +1,194 @@
+### Location 1
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 1,
+  "idBien": 1,
+  "mailLoueur": "bob.martin@example.com",
+  "dateDébut": "20241015",
+  "dateFin": "20241018",
+  "avis": 4.5
+}
+
+### Location 2
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 2,
+  "idBien": 2,
+  "mailLoueur": "henri.lemoine@example.com",
+  "dateDébut": "20241101",
+  "dateFin": "20241104",
+  "avis": 4.3
+}
+
+### Location 3
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 3,
+  "idBien": 3,
+  "mailLoueur": "caroline.dupont@example.com",
+  "dateDébut": "20241210",
+  "dateFin": "20241213",
+  "avis": 4.8
+}
+
+### Location 4
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 4,
+  "idBien": 4,
+  "mailLoueur": "elise.moreau@example.com",
+  "dateDébut": "20241020",
+  "dateFin": "20241023",
+  "avis": 4.7
+}
+
+### Location 5
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 5,
+  "idBien": 5,
+  "mailLoueur": "francois.petit@example.com",
+  "dateDébut": "20241115",
+  "dateFin": "20241118",
+  "avis": 4.0
+}
+
+### Location 6
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 6,
+  "idBien": 6,
+  "mailLoueur": "gaelle.roux@example.com",
+  "dateDébut": "20241122",
+  "dateFin": "20241125",
+  "avis": 4.6
+}
+
+### Location 7
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 7,
+  "idBien": 7,
+  "mailLoueur": "isabelle.girard@example.com",
+  "dateDébut": "20241205",
+  "dateFin": "20241208",
+  "avis": 4.2
+}
+
+### Location 8
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 8,
+  "idBien": 8,
+  "mailLoueur": "julien.fournier@example.com",
+  "dateDébut": "20241025",
+  "dateFin": "20241028",
+  "avis": 4.4
+}
+
+### Location 9
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 9,
+  "idBien": 9,
+  "mailLoueur": "karine.mercier@example.com",
+  "dateDébut": "20241105",
+  "dateFin": "20241108",
+  "avis": 4.9
+}
+
+### Location 10
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 10,
+  "idBien": 10,
+  "mailLoueur": "louis.dupuis@example.com",
+  "dateDébut": "20241215",
+  "dateFin": "20241218",
+  "avis": 4.1
+}
+
+### Location 11
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 11,
+  "idBien": 11,
+  "mailLoueur": "marie.fontaine@example.com",
+  "dateDébut": "20241010",
+  "dateFin": "20241013",
+  "avis": 4.4
+}
+
+### Location 12
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 12,
+  "idBien": 12,
+  "mailLoueur": "nicolas.lefevre@example.com",
+  "dateDébut": "20241110",
+  "dateFin": "20241113",
+  "avis": 4.5
+}
+
+### Location 13
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 13,
+  "idBien": 13,
+  "mailLoueur": "olivia.blanc@example.com",
+  "dateDébut": "20241220",
+  "dateFin": "20241223",
+  "avis": 4.6
+}
+
+### Location 14
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 14,
+  "idBien": 14,
+  "mailLoueur": "david.bernard@example.com",
+  "dateDébut": "20241005",
+  "dateFin": "20241008",
+  "avis": 4.8
+}
+
+### Location 15
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 15,
+  "idBien": 15,
+  "mailLoueur": "alice.dumont@example.com",
+  "dateDébut": "20241125",
+  "dateFin": "20241128",
+  "avis": 4.3
+}
