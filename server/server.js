@@ -302,7 +302,6 @@ async function main() {
                         // Récupérer tous les avis pour le bien spécifié
                         const locations = await Location.find({ idBien: idBien });
                         if (!locations || locations.length === 0) {
-                            // return res.status(404).json({ message: "Aucune location ou avis trouvé pour ce bien." });
                             const moyenneDesAvis = "Aucun avis";
                         }
 
@@ -320,6 +319,36 @@ async function main() {
                     }
                 });
 
+                app.get("/biens/user/:idBien", async (req, res) => {
+                    const idBien = Number(req.params.idBien); // Assurez-vous que l'ID est bien un nombre
+
+                    try {
+
+                        // Récupère le mailProprio du bien
+                        const bien = await Bien.findOne({ idBien: idBien });
+
+                        // Vérifie si le bien existe
+                        if (!bien) {
+                            return res.status(404).json({ message: "Le bien n'existe pas." });
+                        }
+
+                        const mailProprio = bien.mailProprio;
+
+                        // Récupère l'utilisateur avec le mailProprio
+                        const utilisateur = await Utilisateur.findOne({ mail: mailProprio });
+
+                        // Vérifie si l'utilisateur existe
+                        if (!utilisateur) {
+                            return res.status(404).json({ message: "L'utilisateur n'existe pas." });
+                        }
+
+                        res.json(utilisateur);
+
+                    } catch (err) {
+                        console.error("Erreur lors de la récupération de l'utilisateur:", err);
+                        res.status(500).json({ error: "Une erreur est survenue lors de la récupération de l'utilisateur." });
+                    }
+                });
 
                 // ### LOCATIONS ###
 
