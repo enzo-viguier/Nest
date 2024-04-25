@@ -294,6 +294,32 @@ async function main() {
                     }
                 });
 
+                // Endpoint pour récupérer la moyenne des avis d'un bien spécifique
+                app.get("/biens/avis/:idBien", async (req, res) => {
+                    const idBien = Number(req.params.idBien); // Assurez-vous que l'ID est bien un nombre
+
+                    try {
+                        // Récupérer tous les avis pour le bien spécifié
+                        const locations = await Location.find({ idBien: idBien });
+                        if (!locations || locations.length === 0) {
+                            return res.status(404).json({ message: "Aucune location ou avis trouvé pour ce bien." });
+                        }
+
+                        // Calculer la moyenne des avis
+                        const sommeDesAvis = locations.reduce((acc, location) => {
+                            return acc + (location.avis ? parseFloat(location.avis) : 0);
+                        }, 0);
+                        const moyenneDesAvis = parseFloat((sommeDesAvis / locations.length).toFixed(1));
+
+                        // Retourner la moyenne des avis
+                        res.json({ moyenneDesAvis });
+                    } catch (err) {
+                        console.error("Erreur lors de la récupération des avis:", err);
+                        res.status(500).json({ error: "Une erreur est survenue lors de la récupération des avis." });
+                    }
+                });
+
+
                 // ### LOCATIONS ###
 
                 // Récupérer toutes les locations
