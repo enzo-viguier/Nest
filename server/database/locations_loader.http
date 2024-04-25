@@ -192,3 +192,43 @@ Content-Type: application/json
   "dateFin": "20241128",
   "avis": 4.3
 }
+
+### Location 16
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 16,
+  "idBien": 1,
+  "mailLoueur": "francois.petit@example.com",
+  "dateDébut": "20240201",
+  "dateFin": "20240208",
+  "avis": 5.0
+}
+
+### Location 17
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 17,
+  "idBien": 1,
+  "mailLoueur": "henri.lemoine@example.com",
+  "dateDébut": "20240209",
+  "dateFin": "20240216",
+  "avis": 3.8
+}
+
+### Location 18
+POST http://localhost:8888/locations/ajouter
+Content-Type: application/json
+
+{
+  "idLocation": 18,
+  "idBien": 2,
+  "mailLoueur": "isabelle.girard@example.com",
+  "dateDébut": "20240217",
+  "dateFin": "20240224",
+  "avis": 4.6
+}
+
