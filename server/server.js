@@ -362,6 +362,13 @@ async function main() {
                     }
                 });
 
+                app.get("/biens/filter", async (req, res) => {
+
+                    return res.send("Hello World");
+                    // TODO : Implémenter la fonctionnalité de filtrage des biens
+
+                });
+
                 // ### LOCATIONS ###
 
                 // Récupérer toutes les locations
