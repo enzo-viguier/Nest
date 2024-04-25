@@ -20,6 +20,10 @@ export class BiensService {
     return this.http.get(`${this.url}/avis/${id}`);
   }
 
+  getUserByIdBien(id: string): Observable<any> {
+    return this.http.get(`${this.url}/user/${id}`);
+  }
+
   // getBien(id: string): Observable<any> {
   //   return this.http.get(`${this.url}/${id}`);
   // }
