@@ -302,7 +302,8 @@ async function main() {
                         // Récupérer tous les avis pour le bien spécifié
                         const locations = await Location.find({ idBien: idBien });
                         if (!locations || locations.length === 0) {
-                            return res.status(404).json({ message: "Aucune location ou avis trouvé pour ce bien." });
+                            // return res.status(404).json({ message: "Aucune location ou avis trouvé pour ce bien." });
+                            res.json({ moyenneDesAvis: "Aucun avis" });
                         }
 
                         // Calculer la moyenne des avis
