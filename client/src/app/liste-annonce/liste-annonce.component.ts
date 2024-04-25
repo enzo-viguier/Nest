@@ -29,7 +29,7 @@ export class ListeAnnonceComponent implements OnInit {
               bien.avis = avis; // Assign avis to each bien
             },
             error: (error) => {
-              console.error("Erreur lors de la récupération des avis pour bien ID:", bien.id, error);
+              console.error("Erreur lors de la récupération des avis pour bien ID:", bien.idBien, error);
               bien.avis = []; // Assign empty array on error
             }
           });
