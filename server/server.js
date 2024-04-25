@@ -299,17 +299,28 @@ async function main() {
                     const idBien = Number(req.params.idBien); // Assurez-vous que l'ID est bien un nombre
 
                     try {
+
+                        const bien = await Bien.findOne({ idBien: idBien });
+                        if (!bien) {
+                            return res.status(404).json({ message: "Le bien n'existe pas." });
+                        }
+
+                        let moyenneDesAvis = 0;
+
+                        console.log("STATE1 : " + moyenneDesAvis);
+
                         // Récupérer tous les avis pour le bien spécifié
                         const locations = await Location.find({ idBien: idBien });
                         if (!locations || locations.length === 0) {
-                            const moyenneDesAvis = "Aucun avis";
+                            moyenneDesAvis = "Aucun avis";
                         }
-
-                        // Calculer la moyenne des avis
-                        const sommeDesAvis = locations.reduce((acc, location) => {
-                            return acc + (location.avis ? parseFloat(location.avis) : 0);
-                        }, 0);
-                        const moyenneDesAvis = parseFloat((sommeDesAvis / locations.length).toFixed(1));
+                        else {
+                            // Calculer la moyenne des avis
+                            const sommeDesAvis = locations.reduce((acc, location) => {
+                                return acc + (location.avis ? parseFloat(location.avis) : 0);
+                            }, 0);
+                            moyenneDesAvis = parseFloat((sommeDesAvis / locations.length).toFixed(1));
+                        }
 
                         // Retourner la moyenne des avis
                         res.json({ moyenneDesAvis });
@@ -319,6 +330,7 @@ async function main() {
                     }
                 });
 
+                // Endpoint pour récupérer l'utilisateur d'un bien spécifique
                 app.get("/biens/user/:idBien", async (req, res) => {
                     const idBien = Number(req.params.idBien); // Assurez-vous que l'ID est bien un nombre
 
