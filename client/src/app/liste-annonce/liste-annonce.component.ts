@@ -24,6 +24,7 @@ export class ListeAnnonceComponent implements OnInit {
 
         // Iterate over each property to fetch its reviews
         this.biens.forEach(bien => {
+
           this.biensService.getAvisBienById(bien.idBien).subscribe({
             next: (avis) => {
               bien.avis = avis; // Assign avis to each bien
@@ -33,6 +34,17 @@ export class ListeAnnonceComponent implements OnInit {
               bien.avis = []; // Assign empty array on error
             }
           });
+
+          this.biensService.getUserByIdBien(bien.idBien).subscribe({
+            next: (user) => {
+              bien.user = user;
+            },
+            error: (error) => {
+              console.log("Erreur lors de la récupération de l'utilisateur d'un bien", bien.idBien, error);
+              bien.user = [];
+            }
+          })
+
         });
       },
       error: (error) => {
