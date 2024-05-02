@@ -12,10 +12,14 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 })
 export class SearchBarComponent {
   searchForm = new FormGroup({
-    destination: new FormControl(''),
-    arrival: new FormControl(''),
-    departure: new FormControl(''),
-    travelers: new FormControl('')
+    commune: new FormControl(''),
+    dateDébut: new FormControl(''),
+    dateFin: new FormControl(''),
+    nbCouchages: new FormControl(''),
+    prix: new FormControl(''),
+    nbChambres: new FormControl(''),
+    distance: new FormControl(''),
+
   });
 
   onSubmit() {
