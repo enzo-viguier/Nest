@@ -19,9 +19,9 @@ app.use(function (req, res, next) {
 });
 
 const MongoClient = require("mongodb").MongoClient;
-const url = "mongodb+srv://aurelien34290:qP6E6Iaemq6zq0LD@cluster0.ctwd82z.mongodb.net/NEST?retryWrites=true&w=majority";
+const url = "mongodb://localhost:27017";
 
-mongoose.connect("mongodb+srv://aurelien34290:qP6E6Iaemq6zq0LD@cluster0.ctwd82z.mongodb.net/NEST?retryWrites=true&w=majority");
+mongoose.connect("mongodb://localhost:27017/NEST");
 mongoose.connection.on('error', console.error.bind(console, 'Erreur lors de la connexion à la base de données:'));
 
 const utilisateurSchema = new Schema({
