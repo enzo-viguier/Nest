@@ -668,6 +668,20 @@ async function main() {
                     }
                 });
 
+                app.get("/utilisateur/:mail", async (req, res) => {
+                    const email = req.params.mail;
+                    try {
+                        const utilisateur = await Utilisateur.findOne({ mail: email });
+                        if (!utilisateur) {
+                            res.status(404).send('Utilisateur non trouvé');
+                        } else {
+                            res.json(utilisateur);
+                        }
+                    } catch (err) {
+                        res.status(500).send(err);
+                    }
+                });
+
 
                 // OLD DATABASE
 
