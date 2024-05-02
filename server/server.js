@@ -19,9 +19,9 @@ app.use(function (req, res, next) {
 });
 
 const MongoClient = require("mongodb").MongoClient;
-const url = "mongodb://localhost:27017";
+const url = "mongodb+srv://aurelien34290:qP6E6Iaemq6zq0LD@cluster0.ctwd82z.mongodb.net/NEST?retryWrites=true&w=majority";
 
-mongoose.connect("mongodb://localhost:27017/NEST");
+mongoose.connect("mongodb+srv://aurelien34290:qP6E6Iaemq6zq0LD@cluster0.ctwd82z.mongodb.net/NEST?retryWrites=true&w=majority");
 mongoose.connection.on('error', console.error.bind(console, 'Erreur lors de la connexion à la base de données:'));
 
 const utilisateurSchema = new Schema({
@@ -226,6 +226,64 @@ async function main() {
                         res.status(500).send(err);
                     }
                 });
+
+                function formatDateString(dateString) {
+                    if (!dateString) return undefined;
+                    const parts = dateString.split('-');
+                    if (parts.length !== 3) return undefined;
+
+                    const [day, month, year] = parts;
+                    return `${year}${month}${day}`;
+                }
+
+                app.post("/biens/filter", async (req, res) => {
+                    try {
+                        const { commune, nbCouchages, prix, nbChambres, distance, dateDébut, dateFin } = req.body;
+                        let query = {};
+
+                        if (commune) {
+                            query.commune = commune;
+                        }
+                        if (nbCouchages) {
+                            query.nbCouchages = { $gte: parseInt(nbCouchages) };
+                        }
+                        if (prix) {
+                            query.prix = {$lte: parseInt(prix)};
+                        }
+                        if (nbChambres) {
+                            query.nbChambres = { $gte: parseInt(nbChambres) };
+                        }
+                        if (distance) {
+                            query.distance = { $lte: parseInt(distance) };
+                        }
+
+                        const startDate = formatDateString(dateDébut);
+                        const endDate = formatDateString(dateFin);
+                        if (startDate && endDate && checkDates(startDate, endDate)) {
+                            // Query for overlapping locations
+                            const overlappingLocations = await Location.find({
+                                $or: [
+                                    {dateDébut: {$lte: endDate, $gte: startDate}},
+                                    {dateFin: {$gte: startDate, $lte: endDate}},
+                                    {dateDébut: {$lte: startDate}, dateFin: {$gte: endDate}}
+                                ]
+                            }).distinct('idBien'); // Get the unique bien IDs that have overlaps
+
+                            // Exclude these biens from the final query
+                            if (overlappingLocations.length > 0) {
+                                query.idBien = {$nin: overlappingLocations};
+                            }
+                        }
+                            // Fetch biens that match the criteria and do not have overlapping bookings
+                            const availableBiens = await Bien.find(query).lean();
+                            res.json(availableBiens);
+
+                    } catch (error) {
+                        console.error("Error fetching filtered biens:", error);
+                        res.status(500).send("Internal Server Error");
+                    }
+                });
+
 
                 // Ajouter un bien
                 app.post("/biens/ajouter", async (req, res) => {
