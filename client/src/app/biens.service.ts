@@ -55,6 +55,10 @@ export class BiensService {
     return this.http.get(`http://localhost:8888/utilisateur/${mail}`);
   }
 
+  getAvisByIdBien(id: string): Observable<any> {
+    return this.http.get(`${this.url}/avis/${id}`);
+  }
+
   // getBiensFiltered(filters: any = {}): Observable<any> {
   //   let params = new HttpParams();
   //   if (filters.destination) {
