@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require("express");
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+console.log(process.env.DB_URL);
 
 const Schema = mongoose.Schema;
 const app = express();
@@ -19,9 +21,11 @@ app.use(function (req, res, next) {
 });
 
 const MongoClient = require("mongodb").MongoClient;
-const url = "mongodb://localhost:27017";
+// const url = "mongodb://localhost:27017";
+const url = process.env.MONGO_URL;
 
-mongoose.connect("mongodb://localhost:27017/NEST");
+// mongoose.connect("mongodb://localhost:27017/NEST");
+mongoose.connect(process.env.MONGO_BD_URL);
 mongoose.connection.on('error', console.error.bind(console, 'Erreur lors de la connexion à la base de données:'));
 
 const utilisateurSchema = new Schema({
@@ -668,7 +672,7 @@ async function main() {
                     }
                 });
 
-                app.get("/utilisateur/:mail", async (req, res) => {
+                app.get("/user/:mail", async (req, res) => {
                     const email = req.params.mail;
                     try {
                         const utilisateur = await Utilisateur.findOne({ mail: email });
