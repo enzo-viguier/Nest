@@ -2,8 +2,10 @@ require('dotenv').config();
 const express = require("express");
 const mongoose = require('mongoose');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+const fs = require('fs');
 const bcrypt = require('bcrypt');
-console.log(process.env.DB_URL);
 
 const Schema = mongoose.Schema;
 const app = express();
@@ -12,7 +14,9 @@ const saltRounds = 10;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(cookieParser());
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -75,6 +79,10 @@ function checkDates(dateDebut, dateFin) {
 
     return dateDebutInt < dateFinInt;
 
+}
+
+function createJWTToken(payload, secretKey, expiresIn) {
+    return jwt.sign(payload, secretKey, { expiresIn });
 }
 
 async function main() {
@@ -671,6 +679,46 @@ async function main() {
                         }
                     } catch (err) {
                         res.status(500).send(err);
+                    }
+                });
+
+                app.post('/connexion', async (req, res) => {
+                    const { mail, motDePasse } = req.body;
+                    try {
+                        const utilisateur = await Utilisateur.findOne({ mail });
+                        if (!utilisateur) {
+                            return res.status(404).json({ message: "Utilisateur non trouvé" });
+                        }
+
+                        const match = await bcrypt.compare(motDePasse, utilisateur.motDePasse);
+                        if (match) {
+
+                            const payload = {
+                                mail: utilisateur.mail,
+                                prénom: utilisateur.prénom,
+                                nom: utilisateur.nom,
+                                téléphone: utilisateur.téléphone
+                            };
+
+                            const secretKey = process.env.JWT_SECRET_KEY;
+                            const expireIn = '1h';
+
+                            const token = createJWTToken(payload, secretKey, expireIn);
+
+                            const cookieOptions = {
+                                maxAge: 1000 * 60 * 60, // 1 hour
+                                sameSite: 'strict',
+                            }
+
+                            res.cookie('jwt', token, cookieOptions);
+                            return res.status(200).json({ message: "Authentification réussie" });
+
+                        } else {
+                            return res.status(401).json({ message: "Mot de passe incorrect" });
+                        }
+                    } catch (err) {
+                        console.error("Erreur lors de l'authentification:", err);
+                        res.status(500).json({ error: "Une erreur est survenue lors de l'authentification" });
                     }
                 });
 
