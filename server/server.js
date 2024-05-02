@@ -60,10 +60,28 @@ const Location = mongoose.model('Locations', locationSchema, "locations");
 
 
 app.listen(8888, () => {
-    console.log("Serveur démarré")
+    console.log("Serveur démarré sur http://localhost:8888");
 });
 
 const client = new MongoClient(url);
+
+/*
+
+Fonction qui prend deux paramètres : dateDebut et dateFin qui sont deux string au format "YYYYMMDD"
+
+La fonction doit convertir ces deux string en integer.
+Ensuite il doit vérifier que la date de début est bien inférieure à la date de fin.
+Si oui, la fonction doit retourner true, sinon false.
+
+*/
+
+function checkDates(dateDebut, dateFin) {
+    const dateDebutInt = parseInt(dateDebut);
+    const dateFinInt = parseInt(dateFin);
+
+    return dateDebutInt < dateFinInt;
+
+}
 
 async function main() {
     client.connect()
@@ -397,9 +415,63 @@ async function main() {
                 });
 
                 // Ajouter une location
+                // app.post("/locations/ajouter", async (req, res) => {
+                //     // Extraction des données du corps de la requête
+                //     const { idLocation, idBien, mailLoueur, dateDébut, dateFin, avis } = req.body;
+                //
+                //     try {
+                //         // Vérification de l'existence du locateur
+                //         const locateurExiste = await Utilisateur.findOne({ mail: mailLoueur });
+                //
+                //         // Vérification de l'existence du bien
+                //         const bienExiste = await Bien.findOne({ idBien: idBien });
+                //
+                //         // Si le locateur ou le bien n'existe pas, renvoyez une erreur
+                //         if (!locateurExiste) {
+                //             return res.status(400).json({ message: "Le mail du locateur n'existe pas dans la collection des utilisateurs." });
+                //         }
+                //
+                //         if (!bienExiste) {
+                //             return res.status(400).json({ message: "L'id du bien n'existe pas dans la collection des biens." });
+                //         }
+                //
+                //         // Si le locateur et le bien existent, créez la location
+                //         const nouvelleLocation = new Location({
+                //             idLocation,
+                //             idBien,
+                //             mailLoueur,
+                //             dateDébut,
+                //             dateFin,
+                //             avis
+                //         });
+                //
+                //         // Sauvegarde de la location dans la base de données
+                //         const locationEnregistree = await nouvelleLocation.save();
+                //         res.status(201).json(locationEnregistree);
+                //     } catch (err) {
+                //         console.error("Erreur lors de l'ajout de la location: ", err);
+                //         res.status(500).send(err);
+                //     }
+                // });
+
+                // Ajouter une location
                 app.post("/locations/ajouter", async (req, res) => {
                     // Extraction des données du corps de la requête
                     const { idLocation, idBien, mailLoueur, dateDébut, dateFin, avis } = req.body;
+
+                    const debutNouvelleLocation = parseInt(dateDébut);
+                    const finNouvelleLocation = parseInt(dateFin);
+
+
+                    if (!checkDates(debutNouvelleLocation, finNouvelleLocation)) {
+                        console.log("DATE DEBUT : " + debutNouvelleLocation);
+                        console.log("DATE FIN : " + finNouvelleLocation);
+                        console.log("RESULT : " + checkDates(debutNouvelleLocation, finNouvelleLocation));
+                        return res.status(400).json({ message: "Error CheckDate" });
+                    }
+                    else {
+                        console.log("Date is OK")
+                    }
 
                     try {
                         // Vérification de l'existence du locateur
@@ -417,6 +489,36 @@ async function main() {
                             return res.status(400).json({ message: "L'id du bien n'existe pas dans la collection des biens." });
                         }
 
+                        const listeLocationsExistantes = await Location.find({ idBien: idBien });
+
+                        console.log(listeLocationsExistantes);
+                        console.log("--------------------");
+
+                        for (let location of listeLocationsExistantes) {
+
+                            const debutExistante = parseInt(location.dateDébut);
+                            const finExistante = parseInt(location.dateFin);
+
+                            if (debutNouvelleLocation < debutExistante && finNouvelleLocation > debutExistante && finNouvelleLocation < finExistante) {
+                                return res.status(400).json({ message: "Chevauchement de dates" });
+                            }
+
+                            if (debutNouvelleLocation > debutExistante && debutNouvelleLocation < finExistante && finNouvelleLocation > finExistante) {
+                                return res.status(400).json({ message: "Chevauchement de dates" });
+                            }
+
+                            if (debutNouvelleLocation < debutExistante && finExistante < finNouvelleLocation) {
+                                return res.status(400).json({ message: "Chevauchement de dates" });
+                            }
+
+                            if (debutExistante < debutNouvelleLocation && finNouvelleLocation < finExistante) {
+                                return res.status(400).json({ message: "Chevauchement de dates" });
+                            }
+
+                        }
+
+                        console.log("Je suis passé !")
+
                         // Si le locateur et le bien existent, créez la location
                         const nouvelleLocation = new Location({
                             idLocation,
@@ -428,13 +530,17 @@ async function main() {
                         });
 
                         // Sauvegarde de la location dans la base de données
-                        const locationEnregistree = await nouvelleLocation.save();
-                        res.status(201).json(locationEnregistree);
+                        // const locationEnregistree = await nouvelleLocation.save();
+                        // res.status(201).json(locationEnregistree);
+                        res.status(201).json("HelloWorld");
+
                     } catch (err) {
                         console.error("Erreur lors de l'ajout de la location: ", err);
                         res.status(500).send(err);
                     }
+
                 });
+
 
                 // Modifier une location
                 app.put("/locations/modifier/:idLocation", async (req, res) => {
