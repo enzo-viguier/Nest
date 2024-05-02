@@ -377,8 +377,6 @@ async function main() {
 
                         let moyenneDesAvis = 0;
 
-                        console.log("STATE1 : " + moyenneDesAvis);
-
                         // Récupérer tous les avis pour le bien spécifié
                         const locations = await Location.find({ idBien: idBien });
                         if (!locations || locations.length === 0) {
