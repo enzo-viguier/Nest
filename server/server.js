@@ -69,16 +69,6 @@ app.listen(8888, () => {
 
 const client = new MongoClient(url);
 
-/*
-
-Fonction qui prend deux paramètres : dateDebut et dateFin qui sont deux string au format "YYYYMMDD"
-
-La fonction doit convertir ces deux string en integer.
-Ensuite il doit vérifier que la date de début est bien inférieure à la date de fin.
-Si oui, la fonction doit retourner true, sinon false.
-
-*/
-
 function checkDates(dateDebut, dateFin) {
     const dateDebutInt = parseInt(dateDebut);
     const dateFinInt = parseInt(dateFin);
@@ -117,7 +107,7 @@ async function main() {
 
                 });
 
-                app.get('/utilisateurs/:mail', async (req, res) => {
+                app.get('/utilisateur/:mail', async (req, res) => {
                     const email = req.params.mail;
                     try {
                         const utilisateur = await Utilisateur.findOne({ mail: email });
@@ -672,7 +662,7 @@ async function main() {
                     }
                 });
 
-                app.get("/user/:mail", async (req, res) => {
+                app.get("biens/user/:mail", async (req, res) => {
                     const email = req.params.mail;
                     try {
                         const utilisateur = await Utilisateur.findOne({ mail: email });
