@@ -21,6 +21,7 @@ export class FicheAnnonceComponent implements OnInit {
   locationId: string | null | undefined;
   locationData: any;
   userData: any;
+  avis: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,6 +43,7 @@ export class FicheAnnonceComponent implements OnInit {
       data => {
         this.locationData = data;
         this.loadUserData(this.locationData.mailProprio)
+        this.loadAvisBien(this.locationData.idBien)
       },
       error => {
         console.error('Erreur lors de la récupération des détails de la location', error);
@@ -59,5 +61,18 @@ export class FicheAnnonceComponent implements OnInit {
       }
     );
   }
+
+  private loadAvisBien(id: string) {
+    this.biensService.getAvisBienById(id).subscribe(
+      data => {
+        this.avis = data;
+      },
+      error => {
+        console.error('Erreur lors de la récupération des avis de la location', error);
+      }
+    );
+  }
+
+
 
 }
