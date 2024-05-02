@@ -51,6 +51,10 @@ export class BiensService {
     return this.http.get(`${this.url}/filter`, { params });
   }
 
+  getUserByMail(mail: string): Observable<any> {
+    return this.http.get(`http://localhost:8888/utilisateur/${mail}`);
+  }
+
   // getBiensFiltered(filters: any = {}): Observable<any> {
   //   let params = new HttpParams();
   //   if (filters.destination) {
@@ -69,9 +73,10 @@ export class BiensService {
   //   return this.http.get(this.url, { params });
   // }
 
-  // getBien(id: string): Observable<any> {
-  //   return this.http.get(`${this.url}/${id}`);
-  // }
+  getBien(id: string): Observable<any> {
+    return this.http.get(`${this.url}/${id}`);
+  }
+
   //
   // addBien(bien: any): Observable<any> {
   //   return this.http.post(this.url, bien);
