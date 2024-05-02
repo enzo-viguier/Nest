@@ -3,11 +3,12 @@ import { BiensService } from "../biens.service";
 import { HttpClientModule } from "@angular/common/http";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {JsonPipe} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-liste-annonce',
   standalone: true,
-  imports: [HttpClientModule, JsonPipe],
+  imports: [HttpClientModule, JsonPipe, RouterLink],
   templateUrl: './liste-annonce.component.html',
   styleUrl: './liste-annonce.component.css'
 })
