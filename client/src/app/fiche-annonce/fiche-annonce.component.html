@@ -1,0 +1,105 @@
+<app-nav></app-nav>
+
+
+<!--<section>-->
+<!--  <div class="px-8 py-24 mx-auto md:px-12 lg:px-32 max-w-7xl">-->
+<!--    <div class="grid gap-2 mt-12 lg:max-w-7xl lg:mx-auto lg:grid-cols-3">-->
+<!--      <div class="h-full p-2 overflow-hidden border rounded-3xl">-->
+<!--        <img src="https://picsum.photos/200" class="object-cover h-full border shadow-2xl rounded-2xl">-->
+<!--      </div>-->
+<!--      <div class="relative h-full p-2 overflow-hidden border rounded-3xl lg:col-span-2">-->
+<!--        <img src="https://picsum.photos/200" class="object-cover h-full border shadow-2xl rounded-2xl">-->
+<!--      </div>-->
+<!--      <div class="relative h-full p-2 overflow-hidden border rounded-3xl lg:col-span-2">-->
+<!--        <img src="https://picsum.photos/200" class="object-cover h-full border shadow-2xl rounded-2xl">-->
+<!--      </div>-->
+<!--      <div class="h-full p-2 overflow-hidden border rounded-3xl">-->
+<!--        <img src="https://picsum.photos/200" class="object-cover h-full border shadow-2xl rounded-2xl">-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+<!--<div class="flex justify-center align-items-center">-->
+
+<!--    <div class="grid gap-2 mt-12 lg:max-w-7xl lg:mx-auto lg:grid-cols-3">-->
+<!--        <div class="h-full p-2 overflow-hidden border rounded-3xl">-->
+<!--        <img src="https://picsum.photos/200" class="object-cover h-full border shadow-2xl rounded-2xl">-->
+<!--        </div>-->
+<!--        <div class="relative h-full p-2 overflow-hidden border rounded-3xl lg:col-span-2">-->
+<!--        <img src="https://picsum.photos/200" class="object-cover h-full border shadow-2xl rounded-2xl">-->
+<!--        </div>-->
+<!--        <div class="relative h-full p-2 overflow-hidden border rounded-3xl lg:col-span-2">-->
+<!--        <img src="https://picsum.photos/200" class="object-cover h-full border shadow-2xl rounded-2xl">-->
+<!--        </div>-->
+<!--        <div class="h-full p-2 overflow-hidden border rounded-3xl">-->
+<!--        <img src="https://picsum.photos/200" class="object-cover h-full border shadow-2xl rounded-2xl">-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+<!--&lt;!&ndash; div centré qui englobe le contenu &ndash;&gt;-->
+
+<!--<div class="flex justify-center align-items-center w-300">-->
+
+<!--  <div class="flow-root">-->
+<!--    <dl class="-my-3 divide-y divide-gray-100 text-sm">-->
+<!--      <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">-->
+<!--        <dt class="font-medium text-gray-900">Title</dt>-->
+<!--        <dd class="text-gray-700 sm:col-span-2">Mr</dd>-->
+<!--      </div>-->
+
+<!--      <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">-->
+<!--        <dt class="font-medium text-gray-900">Name</dt>-->
+<!--        <dd class="text-gray-700 sm:col-span-2">John Frusciante</dd>-->
+<!--      </div>-->
+
+<!--      <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">-->
+<!--        <dt class="font-medium text-gray-900">Occupation</dt>-->
+<!--        <dd class="text-gray-700 sm:col-span-2">Guitarist</dd>-->
+<!--      </div>-->
+
+<!--      <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">-->
+<!--        <dt class="font-medium text-gray-900">Salary</dt>-->
+<!--        <dd class="text-gray-700 sm:col-span-2">$1,000,000+</dd>-->
+<!--      </div>-->
+
+<!--      <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">-->
+<!--        <dt class="font-medium text-gray-900">Bio</dt>-->
+<!--        <dd class="text-gray-700 sm:col-span-2">-->
+<!--          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et facilis debitis explicabo-->
+<!--          doloremque impedit nesciunt dolorem facere, dolor quasi veritatis quia fugit aperiam-->
+<!--          aspernatur neque molestiae labore aliquam soluta architecto?-->
+<!--        </dd>-->
+<!--      </div>-->
+<!--    </dl>-->
+<!--  </div>-->
+
+<!--</div>-->
+
+<div class="max-w-screen-lg mx-auto">
+  <header>
+    <img src="https://picsum.photos/1024/480?random" alt="Image de l'habitation" class="w-full object-cover">
+  </header>
+
+  <main class="p-4">
+    <div class="bg-white shadow rounded-lg p-6">
+      <h1 class="text-2xl font-semibold mb-4">Détails de l'habitation</h1>
+      <ul class="space-y-2">
+        <li><strong>Nom et prénom du propriétaire:</strong> {{ userData.nom }} {{ userData['prénom'] }}</li>
+        <li><strong>Mail du propriétaire:</strong>  {{ locationData.mailProprio }}</li>
+        <li><strong>Commune:</strong> {{ locationData.commune }}</li>
+        <li><strong>Rue:</strong> {{ locationData.rue }}</li>
+        <li><strong>Code postal:</strong> {{ locationData.cp }}</li>
+        <li><strong>Nombre de couchage:</strong> {{ locationData.nbCouchages }}</li>
+        <li><strong>Nombre de chambre:</strong> {{ locationData.nbChambres }}</li>
+        <li><strong>Distance du centre ville:</strong> {{ locationData.distance }} mètres</li>
+        <li><strong>Prix:</strong> {{ locationData.prix }} €</li>
+      </ul>
+    </div>
+  </main>
+</div>
+
+
+<app-footer></app-footer>
