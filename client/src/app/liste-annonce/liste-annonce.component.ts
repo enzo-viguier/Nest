@@ -4,17 +4,18 @@ import { HttpClientModule } from "@angular/common/http";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {JsonPipe} from "@angular/common";
 import {RouterLink} from "@angular/router";
+import {SearchBarComponent} from "../search-bar/search-bar.component";
 
 @Component({
   selector: 'app-liste-annonce',
   standalone: true,
-  imports: [HttpClientModule, JsonPipe, RouterLink],
+  imports: [HttpClientModule, JsonPipe, RouterLink, SearchBarComponent],
   templateUrl: './liste-annonce.component.html',
   styleUrl: './liste-annonce.component.css'
 })
 export class ListeAnnonceComponent implements OnInit {
 
-  biens: any[] = []
+  biens: any[] = [];
 
   constructor(private biensService: BiensService) {}
 
@@ -53,5 +54,15 @@ export class ListeAnnonceComponent implements OnInit {
         this.biens = []; // Set biens to an empty array on error
       }
     });
+  }
+  onFiltersChange(filters: any) {
+    console.log('Filters received', filters);
+    this.biensService.getBiensFiltered(filters).subscribe(
+      biens => {
+        this.biens = biens;
+        console.log('Biens updated', biens);
+      },
+      error => console.error('Error fetching filtered biens:', error)
+    );
   }
 }

@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
-
 @Component({
   selector: 'app-search-bar',
   standalone: true,
@@ -11,6 +10,8 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
   styleUrl: './search-bar.component.css'
 })
 export class SearchBarComponent {
+  @Output() onSearch = new EventEmitter<any>();
+
   searchForm = new FormGroup({
     commune: new FormControl(''),
     dateDébut: new FormControl(''),
@@ -23,6 +24,6 @@ export class SearchBarComponent {
   });
 
   onSubmit() {
-    console.log(this.searchForm.value);
+    this.onSearch.emit(this.searchForm.value);
   }
 }
