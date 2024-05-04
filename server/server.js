@@ -15,7 +15,9 @@ const saltRounds = 10;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+    credentials: true
+}));
 app.use(cookieParser());
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -707,10 +709,12 @@ async function main() {
 
                             const cookieOptions = {
                                 maxAge: 1000 * 60 * 60, // 1 hour
-                                sameSite: 'strict',
+                                sameSite: 'Lax',
+                                httpOnly: false,
+                                secure: false
                             }
 
-                            res.cookie('jwt', token, cookieOptions);
+                            res.cookie('nest', token, cookieOptions);
                             return res.status(200).json({ message: "Authentification réussie" });
 
                         } else {

@@ -1,0 +1,49 @@
+<app-nav></app-nav>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div class="px-4 py-5 sm:px-6 flex items-center space-x-4">
+      <img class="h-16 w-16 rounded-full" src="https://picsum.photos/200" alt="User Photo">
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">Nom de l'utilisateur</h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">Email de l'utilisateur</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <h3 class="text-lg leading-6 font-medium text-gray-900">Vos biens</h3>
+    <div class="bg-white shadow overflow-hidden sm:rounded-md mt-3">
+      <ul role="list" class="divide-y divide-gray-200">
+        <!-- Repeat this li for each property -->
+        <li class="px-4 py-4 sm:px-6">
+          <div class="flex items-center justify-between">
+            <div class="text-sm font-medium text-gray-900">Rue - Commune - Code Postal - Prix €</div>
+            <div class="ml-2 flex-shrink-0 flex">
+              <button type="button" class="text-indigo-600 hover:text-indigo-900">Modifier</button>
+              <button type="button" class="ml-4 text-red-600 hover:text-red-900">Supprimer</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <button type="button" class="mt-4 px-4 py-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-700">Mettre un bien à louer</button>
+  </div>
+
+  <div class="mt-5">
+    <h3 class="text-lg leading-6 font-medium text-gray-900">Vos locations</h3>
+    <div class="bg-white shadow overflow-hidden sm:rounded-md mt-3">
+      <ul role="list" class="divide-y divide-gray-200">
+        <!-- Repeat this li for each rental -->
+        <li class="px-4 py-4 sm:px-6">
+          <div class="flex items-center justify-between">
+            <div class="text-sm font-medium text-gray-900">Rue - Commune - Code Postal - Date début - Date fin - Avis: 3.5</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<app-footer></app-footer>
