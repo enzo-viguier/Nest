@@ -6,6 +6,7 @@ import {NotfoundComponent} from "./notfound/notfound.component";
 import {FicheAnnonceComponent} from "./fiche-annonce/fiche-annonce.component";
 import {CompteComponent} from "./compte/compte.component";
 import {CreeAnnonceComponent} from "./cree-annonce/cree-annonce.component";
+import {ReserverLocationComponent} from "./reserver-location/reserver-location.component";
 
 export const routes: Routes = [
 
@@ -28,6 +29,11 @@ export const routes: Routes = [
     path: 'location/:id',
     component: FicheAnnonceComponent,
     title: 'NEST - Fiche Annonce'
+  },
+  {
+    path: 'reservation/:id',
+    component: ReserverLocationComponent,
+    title: 'NEST - Réserver une location'
   },
   {
     path: 'compte',
