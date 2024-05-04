@@ -5,6 +5,7 @@ import {InscriptionComponent} from "./inscription/inscription.component";
 import {NotfoundComponent} from "./notfound/notfound.component";
 import {FicheAnnonceComponent} from "./fiche-annonce/fiche-annonce.component";
 import {CompteComponent} from "./compte/compte.component";
+import {CreeAnnonceComponent} from "./cree-annonce/cree-annonce.component";
 
 export const routes: Routes = [
 
@@ -32,6 +33,11 @@ export const routes: Routes = [
     path: 'compte',
     component: CompteComponent,
     title: 'NEST - Mon Compte'
+  },
+  {
+    path: 'compte/cree-annonce',
+    component: CreeAnnonceComponent,
+    title: 'NEST - Créer une annonce'
   },
   //Page NotFound -> A mettre en dernier !
   {
