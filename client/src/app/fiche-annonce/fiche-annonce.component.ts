@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BiensService} from "../biens.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {NavComponent} from "../nav/nav.component";
 import {FooterComponent} from "../footer/footer.component";
 import {JsonPipe} from "@angular/common";
@@ -11,7 +11,8 @@ import {JsonPipe} from "@angular/common";
   imports: [
     NavComponent,
     FooterComponent,
-    JsonPipe
+    JsonPipe,
+    RouterLink
   ],
   templateUrl: './fiche-annonce.component.html',
   styleUrl: './fiche-annonce.component.css'
