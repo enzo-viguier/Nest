@@ -19,4 +19,8 @@ export class LocationService {
     };
     return this.http.post(`${this.apiUrl}/ajouter`, locationData);
   }
+
+  getLocationsByLocataireId(mail: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/loueur/${mail}`);
+  }
 }

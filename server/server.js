@@ -450,6 +450,20 @@ async function main() {
 
                 // ### LOCATIONS ###
 
+                app.get("/locations/loueur/:mailLoueur", async (req, res) => {
+                    const mailLoueur = req.params.mailLoueur;
+                    try {
+                        const location = await Location.find({ mailLoueur: mailLoueur });
+                        if (!location) {
+                            res.status(404).send('Location non trouvée');
+                        } else {
+                            res.json(location);
+                        }
+                    } catch (err) {
+                        res.status(500).send(err);
+                    }
+                });
+
                 // Récupérer toutes les locations
                 app.get("/locations", async (req, res) => {
                     try {
