@@ -89,4 +89,8 @@ export class BiensService {
     return this.http.delete(`${this.url}/supprimer/${id}`);
   }
 
+  getListeImage() {
+    return this.http.get('http://localhost:8888/api/images');
+  }
+
 }

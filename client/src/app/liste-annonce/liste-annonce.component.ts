@@ -16,10 +16,23 @@ import {SearchBarComponent} from "../search-bar/search-bar.component";
 export class ListeAnnonceComponent implements OnInit {
 
   biens: any[] = [];
+  listeImages: any;
 
   constructor(private biensService: BiensService) {}
 
   ngOnInit(): void {
+
+    this.biensService.getListeImage().subscribe({
+      next: (response: any) => {
+        this.listeImages = response.images;  // stocke les URLs d'images
+        this.fetchBiens();
+      },
+      error: (error) => {
+        console.error("Erreur lors de la récupération des images", error);
+        this.listeImages = [];
+      }
+    });
+
     this.biensService.getBiens().subscribe({
       next: (biens) => {
         this.biens = biens;
@@ -30,10 +43,12 @@ export class ListeAnnonceComponent implements OnInit {
         this.biens = []; // Set biens to an empty array on error
       }
     });
+
   }
 
   private addProperties(biens: any[]): void {
     biens.forEach(bien => {
+
       this.biensService.getAvisBienById(bien.idBien).subscribe({
         next: (avis) => {
           bien.avis = avis;
@@ -53,6 +68,7 @@ export class ListeAnnonceComponent implements OnInit {
           bien.user = {};
         }
       });
+
     });
   }
 
@@ -65,4 +81,28 @@ export class ListeAnnonceComponent implements OnInit {
       error => console.error('Error fetching filtered biens:', error)
     );
   }
+
+  private fetchBiens(): void {
+    this.biensService.getBiens().subscribe({
+      next: (biens) => {
+        this.biens = biens;
+        this.addProperties(this.biens);
+        this.assignImagesToBiens(); // Nouvelle méthode pour assigner les images
+      },
+      error: (error) => {
+        console.error("Erreur lors de la récupération des biens:", error);
+        this.biens = []; // Set biens to an empty array on error
+      }
+    });
+  }
+
+  private assignImagesToBiens(): void {
+    if (this.biens.length && this.listeImages.length) {
+      this.biens.forEach((bien, index) => {
+        // Assigner une image de manière cyclique
+        bien.image = this.listeImages[index % this.listeImages.length];
+      });
+    }
+  }
+
 }

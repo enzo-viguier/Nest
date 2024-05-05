@@ -820,7 +820,7 @@ async function main() {
 
 async function fetchImages() {
     try {
-        const response = await axios.get('https://pixabay.com/api/?key=43721256-8a1e714a0918566e71762d223&q=chamber&image_type=photo&pretty=true');
+        const response = await axios.get('https://pixabay.com/api/?key=43721256-8a1e714a0918566e71762d223&q=house&image_type=photo&pretty=true');
         const webformatURLs = response.data.hits.map(hit => hit.webformatURL);
         return webformatURLs;
     } catch (error) {
