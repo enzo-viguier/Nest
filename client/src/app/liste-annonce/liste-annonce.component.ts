@@ -22,32 +22,8 @@ export class ListeAnnonceComponent implements OnInit {
   ngOnInit(): void {
     this.biensService.getBiens().subscribe({
       next: (biens) => {
-        this.biens = biens; // Assuming 'biens' is an array of properties
-
-        // Iterate over each property to fetch its reviews
-        this.biens.forEach(bien => {
-
-          this.biensService.getAvisBienById(bien.idBien).subscribe({
-            next: (avis) => {
-              bien.avis = avis; // Assign avis to each bien
-            },
-            error: (error) => {
-              console.error("Erreur lors de la récupération des avis pour bien ID:", bien.idBien, error);
-              bien.avis = []; // Assign empty array on error
-            }
-          });
-
-          this.biensService.getUserByIdBien(bien.idBien).subscribe({
-            next: (user) => {
-              bien.user = user;
-            },
-            error: (error) => {
-              console.log("Erreur lors de la récupération de l'utilisateur d'un bien", bien.idBien, error);
-              bien.user = [];
-            }
-          })
-
-        });
+        this.biens = biens;
+        this.addProperties(this.biens);
       },
       error: (error) => {
         console.error("Erreur lors de la récupération des biens:", error);
@@ -55,12 +31,36 @@ export class ListeAnnonceComponent implements OnInit {
       }
     });
   }
+
+  private addProperties(biens: any[]): void {
+    biens.forEach(bien => {
+      this.biensService.getAvisBienById(bien.idBien).subscribe({
+        next: (avis) => {
+          bien.avis = avis;
+        },
+        error: (error) => {
+          console.error("Erreur lors de la récupération des avis pour bien ID:", bien.idBien, error);
+          bien.avis = [];
+        }
+      });
+
+      this.biensService.getUserByIdBien(bien.idBien).subscribe({
+        next: (user) => {
+          bien.user = user;
+        },
+        error: (error) => {
+          console.error("Erreur lors de la récupération de l'utilisateur d'un bien", bien.idBien, error);
+          bien.user = {};
+        }
+      });
+    });
+  }
+
   onFiltersChange(filters: any) {
-    console.log('Filters received', filters);
     this.biensService.getBiensFiltered(filters).subscribe(
       biens => {
         this.biens = biens;
-        console.log('Biens updated', biens);
+        this.addProperties(this.biens);
       },
       error => console.error('Error fetching filtered biens:', error)
     );
