@@ -100,7 +100,7 @@
       </ul>
 
     </div>
-    <a [routerLink]="['/reservation', locationId]" class="mt-4 px-4 py-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-700">Réserver</a>
+    <a *ngIf="isLogged" [routerLink]="['/reservation', locationId]" class="mt-4 px-4 py-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-700">Réserver</a>
   </main>
 
 

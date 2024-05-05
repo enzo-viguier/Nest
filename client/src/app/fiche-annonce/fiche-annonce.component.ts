@@ -3,7 +3,8 @@ import {BiensService} from "../biens.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {NavComponent} from "../nav/nav.component";
 import {FooterComponent} from "../footer/footer.component";
-import {JsonPipe} from "@angular/common";
+import {JsonPipe, NgIf} from "@angular/common";
+import {UtilisateurService} from "../utilisateur.service";
 
 @Component({
   selector: 'app-fiche-annonce',
@@ -12,7 +13,8 @@ import {JsonPipe} from "@angular/common";
     NavComponent,
     FooterComponent,
     JsonPipe,
-    RouterLink
+    RouterLink,
+    NgIf
   ],
   templateUrl: './fiche-annonce.component.html',
   styleUrl: './fiche-annonce.component.css'
@@ -23,10 +25,12 @@ export class FicheAnnonceComponent implements OnInit {
   locationData: any;
   userData: any;
   avis: any;
+  isLogged: boolean | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private biensService: BiensService
+    private biensService: BiensService,
+    private utilisateurService: UtilisateurService
   ) {}
 
   ngOnInit() {
@@ -34,6 +38,13 @@ export class FicheAnnonceComponent implements OnInit {
       this.locationId = params.get('id');
       if (this.locationId) {
         this.loadLocationDetails(this.locationId);
+      }
+    });
+
+    this.utilisateurService.isLogedIn().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.isLogged = response;
       }
     });
 
