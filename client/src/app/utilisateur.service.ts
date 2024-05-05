@@ -78,6 +78,7 @@ export class UtilisateurService {
   deconnexion() {
     this.cookieService.delete('nest');
     this.loggedIn.next(false);
+    this.router.navigate(['/']);
   }
 
   private setSession(token: string) {

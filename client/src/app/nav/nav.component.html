@@ -15,13 +15,14 @@
               <a class="text-gray-500 transition hover:text-gray-500/75" routerLink="/"> Logement </a>
             </li>
 
-            <li>
-              <a class="text-gray-500 transition hover:text-gray-500/75" routerLink="/"> Explorer+ </a>
-            </li>
+<!--            <li>-->
+<!--              <a class="text-gray-500 transition hover:text-gray-500/75" routerLink="/"> Explorer+ </a>-->
+<!--            </li>-->
 
-            <li>
-              <a class="text-gray-500 transition hover:text-gray-500/75" routerLink="/"> [A DETERMINER] </a>
-            </li>
+<!--            <li>-->
+<!--              <a class="text-gray-500 transition hover:text-gray-500/75" routerLink="/"> [A DETERMINER] </a>-->
+<!--            </li>-->
+
           </ul>
         </nav>
       </div>
@@ -29,14 +30,14 @@
       <div class="flex items-center gap-4">
         <div class="sm:flex sm:gap-4">
 
-          <a
+          <a *ngIf="isLogged"
             class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
             routerLink="/compte"
           >
             Mon compte
           </a>
 
-          <a
+          <a *ngIf="!isLogged"
             class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
             routerLink="/connexion"
           >
@@ -44,9 +45,15 @@
           </a>
 
           <div class="hidden sm:flex">
-            <a routerLink="/inscription" class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600">
+            <a *ngIf="!isLogged"
+              routerLink="/inscription" class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600">
               Inscription
             </a>
+
+            <button *ngIf="isLogged" (click)="logout()" class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600">
+              Déconnexion
+            </button>
+
           </div>
         </div>
 
