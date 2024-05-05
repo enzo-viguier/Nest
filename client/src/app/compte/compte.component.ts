@@ -117,4 +117,20 @@ export class CompteComponent implements OnInit {
       }
     });
   }
+
+  deleteBien(bienId: string) {
+    if (confirm('Êtes vous sur de vouloir supprimer ce bien ?')) {
+      this.biensService.deleteBien(bienId).subscribe(() => {
+        this.verifyUserLoggedIn();
+      });
+    }
+  }
+
+  deleteLocation(locationId: string) {
+    if (confirm('Êtes vous sur de vouloir supprimer cette location ?')) {
+      this.locationService.deleteLocationById(locationId).subscribe(() => {
+        this.verifyUserLoggedIn();
+      });
+    }
+  }
 }

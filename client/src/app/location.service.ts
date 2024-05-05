@@ -23,4 +23,8 @@ export class LocationService {
   getLocationsByLocataireId(mail: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/loueur/${mail}`);
   }
+
+  deleteLocationById(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/supprimer/${id}`);
+  }
 }

@@ -81,12 +81,12 @@ export class BiensService {
     return this.http.post(`${this.url}/ajouter`, bien);
   }
 
-  // updateBien(id: string, bien: any): Observable<any> {
-  //   return this.http.put(`${this.url}/${id}`, bien);
-  // }
-  //
-  // deleteBien(id: string): Observable<any> {
-  //   return this.http.delete(`${this.url}/${id}`);
-  // }
+  updateBien(id: string, bien: any): Observable<any> {
+    return this.http.put(`${this.url}/${id}`, bien);
+  }
+
+  deleteBien(id: string): Observable<any> {
+    return this.http.delete(`${this.url}/supprimer/${id}`);
+  }
 
 }
