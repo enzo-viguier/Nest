@@ -82,6 +82,6 @@ export class ReserverLocationComponent {
 
     private formatDate(date: string): string {
         const parts = date.split('-');
-        return parts[2] + parts[1] + parts[0]; // Assuming input format is DD-MM-YYYY
+        return parts[0] + parts[1] + parts[2]; // Assuming input format is YYYY-MM-DD my bad j'ai fait une erreur
     }
 }
