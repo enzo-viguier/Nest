@@ -39,6 +39,10 @@ export class BiensService {
     return this.http.get(`${this.url}/avis/${id}`);
   }
 
+  getBiensByProprio(mail: string): Observable<any> {
+    return this.http.get(`${this.url}/proprio/${mail}`);
+  }
+
   // getBiensFiltered(filters: any = {}): Observable<any> {
   //   let params = new HttpParams();
   //   if (filters.destination) {

@@ -16,9 +16,9 @@
     <div class="bg-white shadow overflow-hidden sm:rounded-md mt-3 mb-5">
       <ul role="list" class="divide-y divide-gray-200">
         <!-- Repeat this li for each property -->
-        <li class="px-4 py-4 sm:px-6">
+        <li *ngFor="let bien of biens" class="px-4 py-4 sm:px-6">
           <div class="flex items-center justify-between">
-            <div class="text-sm font-medium text-gray-900">Rue - Commune - Code Postal - Prix €</div>
+            <div class="text-sm font-medium text-gray-900">{{ bien?.rue }} - {{ bien?.commune }} - {{ bien?.cp }} - {{bien.prix}}</div>
             <div class="ml-2 flex-shrink-0 flex">
               <button type="button" class="text-indigo-600 hover:text-indigo-900">Modifier</button>
               <button type="button" class="ml-4 text-red-600 hover:text-red-900">Supprimer</button>

@@ -409,6 +409,20 @@ async function main() {
                     }
                 });
 
+                app.get("/biens/proprio/:mailProprio", async (req, res) => {
+                    const mailProprio = req.params.mailProprio;
+                    try {
+                        const biens = await Bien.find({ mailProprio: mailProprio });
+                        if (!biens) {
+                            res.status(404).send('Bien non trouvé');
+                        } else {
+                            res.json(biens);
+                        }
+                    } catch (err) {
+                        res.status(500).send(err);
+                    }
+                });
+
                 // Endpoint pour récupérer l'utilisateur d'un bien spécifique
                 app.get("/biens/user/:idBien", async (req, res) => {
                     const idBien = Number(req.params.idBien); // Assurez-vous que l'ID est bien un nombre

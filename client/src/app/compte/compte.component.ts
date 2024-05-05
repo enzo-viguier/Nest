@@ -58,6 +58,7 @@ export class CompteComponent implements OnInit {
         next: (userInfo) => {
           this.utilisateur = userInfo;
           this.fetchLocations();
+          this.fetchBiensByProprio();
         },
         error: (err) => {
           console.error("Erreur lors de la récupération des informations utilisateur", err);
@@ -86,6 +87,22 @@ export class CompteComponent implements OnInit {
       error: (err) => {
         console.error("Erreur lors de la récupération des locations", err);
         this.locations = [];
+      }
+    });
+  }
+
+  fetchBiensByProprio() {
+    if (!this.utilisateur || !this.utilisateur.mail) {
+      return;
+    }
+
+    this.biensService.getBiensByProprio(this.utilisateur.mail).subscribe({
+      next: (biens) => {
+        this.biens = biens;
+      },
+      error: (err) => {
+        console.error("Erreur lors de la récupération des biens", err);
+        this.biens = [];
       }
     });
   }
