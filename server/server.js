@@ -514,11 +514,15 @@ async function main() {
                 //     }
                 // });
 
+                async function getNextIdLocation() {
+                    const lastLocation = await Location.findOne().sort({ idLocation: -1 }).exec();
+                    return lastLocation ? lastLocation.idLocation + 1 : 1;
+                }
+
                 // Ajouter une location
                 app.post("/locations/ajouter", async (req, res) => {
-                    // Extraction des données du corps de la requête
-                    const { idLocation, idBien, mailLoueur, dateDébut, dateFin, avis } = req.body;
-
+                    const idLocation = await getNextIdLocation();
+                    const { idBien, mailLoueur, dateDébut, dateFin, avis } = req.body;
                     const debutNouvelleLocation = parseInt(dateDébut);
                     const finNouvelleLocation = parseInt(dateFin);
 
@@ -590,9 +594,8 @@ async function main() {
                         });
 
                         // Sauvegarde de la location dans la base de données
-                        // const locationEnregistree = await nouvelleLocation.save();
-                        // res.status(201).json(locationEnregistree);
-                        res.status(201).json("HelloWorld");
+                        const locationEnregistree = await nouvelleLocation.save();
+                        res.status(201).json(locationEnregistree);
 
                     } catch (err) {
                         console.error("Erreur lors de l'ajout de la location: ", err);
