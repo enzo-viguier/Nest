@@ -5,6 +5,7 @@ import { LocationService } from '../location.service';
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute } from '@angular/router';
 import { UtilisateurService } from '../utilisateur.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class ReserverLocationComponent {
   userMail: string | null | undefined;
 
   constructor(
+    private router: Router,
     private utilisateurService: UtilisateurService,
     private locationService: LocationService,
     private route: ActivatedRoute  // Inject ActivatedRoute here
@@ -58,6 +60,8 @@ export class ReserverLocationComponent {
       next: (response) => console.log('Reservation added', response),
       error: (err) => console.error('Error adding reservation', err)
     });
+      this.router.navigate(['/compte']);
+
   }
 
   ngOnInit() {

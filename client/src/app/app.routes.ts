@@ -8,6 +8,7 @@ import {CompteComponent} from "./compte/compte.component";
 import {CreeAnnonceComponent} from "./cree-annonce/cree-annonce.component";
 import {ReserverLocationComponent} from "./reserver-location/reserver-location.component";
 import {ModifierAnnonceComponent} from "./modifier-annonce/modifier-annonce.component";
+import {ModifierLocationComponent} from "./modifier-location/modifier-location.component";
 
 export const routes: Routes = [
 
@@ -50,6 +51,11 @@ export const routes: Routes = [
     path: 'compte/modifier-annonce/:id',
     component: ModifierAnnonceComponent,
     title: 'NEST - Modifier une annonce'
+  },
+  {
+    path: 'compte/modifier-location/:id',
+    component: ModifierLocationComponent,
+    title: 'NEST - Modifier une location'
   },
 
   //Page NotFound -> A mettre en dernier !

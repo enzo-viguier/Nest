@@ -20,11 +20,19 @@ export class LocationService {
     return this.http.post(`${this.apiUrl}/ajouter`, locationData);
   }
 
+  getLocationById(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`);
+  }
+
   getLocationsByLocataireId(mail: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/loueur/${mail}`);
   }
 
   deleteLocationById(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/supprimer/${id}`);
+  }
+
+  updateLocationById(id: string, locationData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/modifier/${id}`, locationData);
   }
 }
