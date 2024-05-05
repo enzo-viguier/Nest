@@ -3,6 +3,3 @@ run-server:
 
 run-client:
 	cd client/ && ng serve -o
-
-load-database:
-	./JsonBD/LoadBD.sh
