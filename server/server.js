@@ -328,32 +328,39 @@ async function main() {
 
                 // Modifier un bien
                 app.put("/biens/modifier/:idBien", async (req, res) => {
-                    const { commune, rue, cp, nbCouchages, nbChambres, distance, prix } = req.body;
-                    const idBien = req.params.idBien;
+                    const {
+                        commune, rue, cp, nbCouchages, nbChambres, distance, prix
+                    } = req.body;
 
-                    try {
-                        const updatedData = {
-                            ...(commune && {commune}),
-                            ...(rue && {rue}),
-                            ...(cp && {cp}),
-                            ...(nbCouchages && {nbCouchages}),
-                            ...(nbChambres && {nbChambres}),
-                            ...(distance && {distance}),
-                            ...(prix && {prix})
-                        };
+                    const idBien = req.params.idBien; // Assuming idBien is passed as a URL parameter
 
-                        const result = await db.collection("biens").updateOne({ idBien }, { $set: updatedData });
+// Construct the update object dynamically based on provided values
+                    const updateData = {
+                        ...(commune !== undefined && { commune }),
+                        ...(rue !== undefined && { rue }),
+                        ...(cp !== undefined && { cp }),
+                        ...(nbCouchages !== undefined && { nbCouchages }),
+                        ...(nbChambres !== undefined && { nbChambres }),
+                        ...(distance !== undefined && { distance }),
+                        ...(prix !== undefined && { prix })
+                    };
 
-                        if (result.matchedCount === 0) {
-                            res.status(404).json({ message: "Bien non trouvé" });
-                        } else {
-                            res.status(200).json({ message: "Bien mis à jour avec succès", result: result });
-                        }
-                    } catch (error) {
-                        console.error("Erreur lors de la mise à jour du bien:", error);
-                        res.status(500).json({ error: "Une erreur est survenue lors de la mise à jour du bien" });
-                    }
-
+                    Bien.findOneAndUpdate(
+                        { idBien: idBien }, // Search criteria using custom field idBien
+                        { $set: updateData }, // Set updated values
+                        { new: true, runValidators: true } // Options to return updated doc and run schema validators
+                    )
+                        .then(updatedBien => {
+                            if (!updatedBien) {
+                                res.status(404).json({ message: 'Bien non trouvé' });
+                            } else {
+                                res.json(updatedBien); // Send back the updated document
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erreur lors de la mise à jour du bien:', error);
+                            res.status(500).json({ error: 'Erreur interne du serveur' });
+                        });
                 });
 
                 // Supprimer un bien
