@@ -20,7 +20,7 @@
           <div class="flex items-center justify-between">
             <div class="text-sm font-medium text-gray-900">{{ bien?.rue }} - {{ bien?.commune }} - {{ bien?.cp }} - {{bien.prix}}</div>
             <div class="ml-2 flex-shrink-0 flex">
-              <button type="button" class="text-indigo-600 hover:text-indigo-900">Modifier</button>
+              <button type="button" class="text-indigo-600 hover:text-indigo-900" [routerLink]="['/compte/modifier-annonce', bien.idBien]">Modifier</button>
               <button type="button" class="ml-4 text-red-600 hover:text-red-900" (click)="deleteBien(bien.idBien)">Supprimer</button>
             </div>
           </div>
@@ -38,7 +38,7 @@
           <div class="flex items-center justify-between">
             <div class="text-sm font-medium text-gray-900">{{ location?.bienDetails.rue }} - {{ location?.bienDetails.commune }} - {{ location?.bienDetails.cp }} - {{ location?.["dateDébut"] }} - {{ location?.dateFin }} - Avis: {{ location?.avis }}</div>
             <div class="ml-2 flex-shrink-0 flex">
-              <button type="button" class="text-indigo-600 hover:text-indigo-900">Modifier</button>
+              <button type="button" class="text-indigo-600 hover:text-indigo-900" [routerLink]="['/compte/modifier-location', location.idLocation]">Modifier</button>
               <button type="button" class="ml-4 text-red-600 hover:text-red-900" (click)="deleteLocation(location.idLocation)">Supprimer</button>
             </div>
           </div>

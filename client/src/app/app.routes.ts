@@ -7,6 +7,7 @@ import {FicheAnnonceComponent} from "./fiche-annonce/fiche-annonce.component";
 import {CompteComponent} from "./compte/compte.component";
 import {CreeAnnonceComponent} from "./cree-annonce/cree-annonce.component";
 import {ReserverLocationComponent} from "./reserver-location/reserver-location.component";
+import {ModifierAnnonceComponent} from "./modifier-annonce/modifier-annonce.component";
 
 export const routes: Routes = [
 
@@ -45,6 +46,12 @@ export const routes: Routes = [
     component: CreeAnnonceComponent,
     title: 'NEST - Créer une annonce'
   },
+  {
+    path: 'compte/modifier-annonce/:id',
+    component: ModifierAnnonceComponent,
+    title: 'NEST - Modifier une annonce'
+  },
+
   //Page NotFound -> A mettre en dernier !
   {
     path: '**',

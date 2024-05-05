@@ -82,7 +82,7 @@ export class BiensService {
   }
 
   updateBien(id: string, bien: any): Observable<any> {
-    return this.http.put(`${this.url}/${id}`, bien);
+    return this.http.put(`${this.url}/modifier/${id}`, bien);
   }
 
   deleteBien(id: string): Observable<any> {
