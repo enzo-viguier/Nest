@@ -6,11 +6,13 @@ import { FooterComponent } from "../footer/footer.component";
 import { UtilisateurService } from "../utilisateur.service";
 import { LocationService } from "../location.service";
 import { BiensService } from "../biens.service";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-compte',
   standalone: true,
   imports: [
+    RouterLink,
     CommonModule,
     NavComponent,
     FooterComponent
