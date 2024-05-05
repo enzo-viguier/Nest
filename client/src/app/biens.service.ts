@@ -61,11 +61,22 @@ export class BiensService {
     return this.http.get(`${this.url}/${id}`);
   }
 
-  //
-  // addBien(bien: any): Observable<any> {
-  //   return this.http.post(this.url, bien);
-  // }
-  //
+  addBien(mail: any, commune: any, rue: any, cp: any, nbCouchage: any, nbChambre: any, distance: any, prix: any): Observable<any> {
+
+    let bien = {
+      mailProprio: mail,
+      commune: commune,
+      rue: rue,
+      cp: cp,
+      nbCouchages: nbCouchage,
+      nbChambres: nbChambre,
+      distance: distance,
+      prix: prix
+    }
+
+    return this.http.post(`${this.url}/ajouter`, bien);
+  }
+
   // updateBien(id: string, bien: any): Observable<any> {
   //   return this.http.put(`${this.url}/${id}`, bien);
   // }

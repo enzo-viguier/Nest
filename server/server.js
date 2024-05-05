@@ -292,7 +292,8 @@ async function main() {
                 // Ajouter un bien
                 app.post("/biens/ajouter", async (req, res) => {
                     // Extraction des données du corps de la requête
-                    const { idBien, mailProprio, commune, rue, cp, nbCouchages, nbChambres, distance, prix } = req.body;
+                    const idBien = await getNextIdBien();
+                    const { mailProprio, commune, rue, cp, nbCouchages, nbChambres, distance, prix } = req.body;
 
                     try {
                         // Vérification de l'existence du propriétaire
@@ -517,6 +518,12 @@ async function main() {
                 async function getNextIdLocation() {
                     const lastLocation = await Location.findOne().sort({ idLocation: -1 }).exec();
                     return lastLocation ? lastLocation.idLocation + 1 : 1;
+                }
+
+                async function getNextIdBien() {
+                    const lastBien = await Bien.findOne().sort({ idBien: -1 }).exec();
+                    console.log("LAST BIEN : ", lastBien);
+                    return lastBien ? lastBien.idBien + 1 : 1;
                 }
 
                 // Ajouter une location
