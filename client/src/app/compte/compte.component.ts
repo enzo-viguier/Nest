@@ -81,6 +81,8 @@ export class CompteComponent implements OnInit {
       next: (locations) => {
         this.locations = locations;
         this.locations.forEach(location => {
+          location.dateDébut = this.unformatDate(location.dateDébut);
+          location.dateFin = this.unformatDate(location.dateFin);
           this.fetchBienDetails(location);
         });
       },
@@ -131,6 +133,18 @@ export class CompteComponent implements OnInit {
       this.locationService.deleteLocationById(locationId).subscribe(() => {
         this.verifyUserLoggedIn();
       });
+    }
+  }
+
+  private unformatDate(date: string | null | undefined): string {
+    if (!date) return '';
+    if (date.length === 8) {
+      const year = date.substring(0, 4);
+      const month = date.substring(4, 6);
+      const day = date.substring(6, 8);
+      return `${year}-${month}-${day}`;
+    } else {
+      throw new Error("Invalid date format");
     }
   }
 }
