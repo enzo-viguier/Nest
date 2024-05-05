@@ -707,6 +707,9 @@ async function main() {
 
                             const token = createJWTToken(payload, secretKey, expireIn);
 
+                            console.log("Token: ", token)
+                            console.log("Token decoded: ", jwt.decode(token));
+
                             const cookieOptions = {
                                 maxAge: 1000 * 60 * 60, // 1 hour
                                 sameSite: 'Lax',
@@ -714,8 +717,14 @@ async function main() {
                                 secure: false
                             }
 
+                            let tokenJson = {
+                                token: token,
+                            };
+
+                            console.log("Token JSON: ", tokenJson)
+
                             res.cookie('nest', token, cookieOptions);
-                            return res.status(200).json({ message: "Authentification réussie" });
+                            return res.status(200).json(tokenJson);
 
                         } else {
                             return res.status(401).json({ message: "Mot de passe incorrect" });
@@ -740,6 +749,21 @@ async function main() {
                 // FIN OLD DATABASE
 
             });
+
+    app.post("/token", (req, res) => {
+        const { token } = req.body;
+        if (!token) {
+            return res.status(401).json({ message: "Non autorisé" });
+        }
+
+        jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ message: "Non autorisé" });
+            }
+            res.json(decoded);
+        });
+    });
+
 }
 
 main();

@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import { CookieService } from 'ngx-cookie-service';
+import {BehaviorSubject} from "rxjs";
 
 export interface ApiResponse {
-  message: string;
+  token: string;
 }
 
 @Injectable({
@@ -12,10 +13,16 @@ export interface ApiResponse {
 })
 export class UtilisateurService {
 
+  private loggedIn: BehaviorSubject<boolean>
+  private token: string | undefined;
+
   constructor(
     private http: HttpClient,
-    private router: Router
-  ) { }
+    private router: Router,
+    private cookieService: CookieService
+  ) {
+    this.loggedIn = new BehaviorSubject(cookieService.check('nest'));
+  }
 
   inscription(nom: string, prenom: string, mail: string, téléphone: string, password: string) {
     console.log("Inscription de l'utilisateur avec le nom " + nom + ", le prénom " + prenom + ", le mail " + mail + " et le mot de passe " + password);
@@ -24,7 +31,6 @@ export class UtilisateurService {
         next: (response) => {
           // Si l'inscription est réussie
           if (response) {
-            console.log("RESPONSE : " + response)
             this.router.navigate(['/connexion']);  // Rediriger vers la page de connexion
           } else {
             console.log("ERROR INSCRIPTION")
@@ -44,12 +50,21 @@ export class UtilisateurService {
       .subscribe({
         next: (response ) => {
           // Si la connexion est réussie
-          if (response && response.message === "Authentification réussie") {
-            console.log("RESPONSE : " + response)
+          if (response) {
+
+            let token = JSON.parse(JSON.stringify(response.token));
+
+            this.token = token;
+
+            this.setSession(token);
+
+            this.getToken();
+
             this.router.navigate(['/compte']);  // Rediriger vers la page compte
+
           } else {
-            console.log("ERROR CONNEXION : " + response.message)
-            // this.router.navigate(['/connexion']);  // Rediriger vers la page de connexion en cas d'échec
+            console.log("ERROR CONNEXION")
+            this.router.navigate(['/connexion']);  // Rediriger vers la page de connexion en cas d'échec
           }
         },
         error: (error) => {
@@ -58,6 +73,29 @@ export class UtilisateurService {
         }
       });
 
+  }
+
+  deconnexion() {
+    this.cookieService.delete('nest');
+    this.loggedIn.next(false);
+  }
+
+  private setSession(token: string) {
+    this.cookieService.set('nest', token);
+    this.loggedIn.next(true);
+  }
+
+  infoToken(token: string) {
+    return  this.http.post("http://localhost:8888/token", {token: token});
+  }
+
+   isLogedIn() {
+    return this.loggedIn;
+  }
+
+  getToken() {
+    this.cookieService.check('nest') ? this.token = this.cookieService.get('nest') : this.token = undefined;
+    return this.token;
   }
 
 }
