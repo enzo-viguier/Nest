@@ -24,7 +24,7 @@ export class ListeAnnonceComponent implements OnInit {
 
     this.biensService.getListeImage().subscribe({
       next: (response: any) => {
-        this.listeImages = response.images;  // stocke les URLs d'images
+        this.listeImages = response.images;
         this.fetchBiens();
       },
       error: (error) => {
@@ -77,6 +77,7 @@ export class ListeAnnonceComponent implements OnInit {
       biens => {
         this.biens = biens;
         this.addProperties(this.biens);
+        this.assignImagesToBiens();
       },
       error => console.error('Error fetching filtered biens:', error)
     );
@@ -87,7 +88,7 @@ export class ListeAnnonceComponent implements OnInit {
       next: (biens) => {
         this.biens = biens;
         this.addProperties(this.biens);
-        this.assignImagesToBiens(); // Nouvelle méthode pour assigner les images
+        this.assignImagesToBiens();
       },
       error: (error) => {
         console.error("Erreur lors de la récupération des biens:", error);
