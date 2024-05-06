@@ -2,7 +2,7 @@
 
 ## Contribution
 
-Ce projet a été un effort collaboratif de **VIGUIER Enzo** et **MILLA Aurélien** (@DenoxM).
+Ce projet a été un effort collaboratif de **[VIGUIER Enzo]("https://github.com/enzo-viguier")** et **[MILLA Aurélien]("https://github.com/DenoxM")**.
 
 ## Introduction
 
